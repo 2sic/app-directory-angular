@@ -1,3 +1,50 @@
-<p>
-  directory works!
-</p>
+<main class="container app-directory-wrapper">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Mit 215 Unternehmen bildet der AGV ein starkes Netzwerk für die Föderung unserer Wirtschaftsregion</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="app-directory-search">
+            <div class="col-xs-12 col-md-7">
+                <h3>Suche</h3>
+                <input type="text" id="app-directory-search" placeholder="z.B. Firma, Ort oder Branche">
+            </div>
+        </div>
+        <div class="app-directory-dropdown">
+            <div class="col-xs-12 col-md-5">
+                <h3>Nach Branche filtern</h3>
+                <select id="app-directory-dropdown">
+                    <option value="" selected>Branche wählen</option>
+                    <option value="2sic">2sic</option>
+                    <option value="alpic">Alpic</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="app-directory-letterlist">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li><a href="#">Alle</a></li>
+                    <li><a href="#">1-10</a></li>
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">B</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-directory-section">
+        <h3>1-10</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div *ngFor="let entry of directory.entries | async" class="col-xs-6 col-sm-3 app-directory-entry">
+                        <img [src]="entry.Logo" [alt]="entry.title">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
