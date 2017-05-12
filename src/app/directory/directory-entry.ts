@@ -1,6 +1,6 @@
 export class DirectoryEntry {
     Title: string;
-    Department: Department;
+    Department: Department[];
     Link: string;
     Logo: string;
 }

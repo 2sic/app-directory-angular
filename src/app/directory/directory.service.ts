@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map'
 
 import { DirectoryEntry } from "app/directory/directory-entry";
 import { Department } from "app/directory/department";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class DirectoryService {
@@ -15,9 +16,9 @@ export class DirectoryService {
   path: string = '/DesktopModules/2sxc/API/app/auto/content';
 
   private headers: Headers = new Headers();
-
-  private entrySubject: Subject<DirectoryEntry[]> = new Subject<DirectoryEntry[]>();
-  private departmentSubject: Subject<Department[]> = new Subject<Department[]>();
+  
+  private entrySubject: BehaviorSubject<DirectoryEntry[]> = new BehaviorSubject<DirectoryEntry[]>([]);
+  private departmentSubject: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>([]);
 
   constructor(
     private http: Http

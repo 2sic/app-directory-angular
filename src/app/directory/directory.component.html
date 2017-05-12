@@ -3,15 +3,15 @@
         <div class="app-directory-search">
             <div class="col-xs-12 col-md-7">
                 <h3>Suche</h3>
-                <input type="text" id="app-directory-search" placeholder="z.B. Firma, Ort oder Branche">
+                <input [(ngModel)]="needle" (keyup)="search()" type="text" id="app-directory-search" placeholder="z.B. Firma, Ort oder Branche">
             </div>
         </div>
         <div class="app-directory-dropdown">
             <div class="col-xs-12 col-md-5">
                 <h3>Nach Branche filtern</h3>
-                <select id="app-directory-dropdown">
-                    <option value="" selected>Branche wählen</option>
-                    <option *ngFor="let department of directory.departments | async" [value]="department.Title">{{department.Title}}</option>
+                <select id="app-directory-dropdown" [(ngModel)]="department" (change)="changeDepartment()">
+                    <option value="alle" selected>Branche wählen</option>
+                    <option *ngFor="let d of departments" [value]="d.Title">{{d.Title}}</option>
                 </select>
             </div>
         </div>
@@ -20,24 +20,22 @@
         <div class="row">
             <div class="col-xs-12">
                 <ul>
-                    <li><a href="#">Alle</a></li>
-                    <li><a href="#">1-10</a></li>
-                    <li><a href="#">A</a></li>
-                    <li><a href="#">B</a></li>
+                    <li>
+                        <a [routerLink]="['/']">Alle</a>
+                    </li>
+                    <li *ngFor="let letter of alphabet">
+                        <a [routerLink]="['/filter', department, letter]">{{letter}}</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div class="app-directory-section">
-        <h3>1-10</h3>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="row">
-                    <div *ngFor="let entry of directory.entries | async" class="col-xs-6 col-sm-3 app-directory-entry">
-                        <img [src]="entry.Logo" [alt]="entry.Title">
-                    </div>
-                </div>
+        <div *ngFor="let group of groups" class="app-directory-group">
+            <h3>{{group.label}}</h3>
+            <div *ngFor="let entry of group.entries" class="app-directory-entry">
+                <img [src]="entry.Logo" [alt]="entry.Title">
             </div>
         </div>
     </div>

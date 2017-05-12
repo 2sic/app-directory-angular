@@ -1,20 +1,29 @@
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from "@angular/router";
+
 import { DirectoryComponent } from './directory.component';
 import { DirectoryService } from "app/directory/directory.service";
+import { GroupPipe } from './group.pipe';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    FormsModule
   ],
   exports: [
     DirectoryComponent
   ],
   declarations: [
-    DirectoryComponent
+    DirectoryComponent,
+    GroupPipe
   ],
   providers: [
-    DirectoryService
+    DirectoryService,
+    GroupPipe,
+    { provide: 'alphabet', useValue: ['1-10', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'] }
   ]
 })
 export class DirectoryModule { }

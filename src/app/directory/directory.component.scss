@@ -1,0 +1,14 @@
+:host {
+    ul {
+        li {
+            list-style: none;
+            display: inline-block;
+            vertical-align: top;
+            a {
+                padding: 0 8px;
+                line-height: 32px;
+                height: 32px;
+            }
+        }
+    }
+}

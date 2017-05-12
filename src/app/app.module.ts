@@ -2,9 +2,29 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { DirectoryModule } from 'app/directory/directory.module';
 import { AppComponent } from './app.component';
+import { DirectoryComponent } from "app/directory/directory.component";
+
+const appRoutes = [
+  {
+    path: 'filter/:department/:letter',
+    component: DirectoryComponent
+  },
+  {
+    path: '',
+    redirectTo: 'filter/alle/alle',
+    pathMatch: 'full'
+  },
+  {
+    path: 'search/:needle',
+    component: DirectoryComponent
+  }
+]
+
+
 
 @NgModule({
   declarations: [
@@ -14,7 +34,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    DirectoryModule
+    DirectoryModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
