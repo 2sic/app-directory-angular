@@ -60,6 +60,11 @@ export class DirectoryComponent implements OnInit {
     this.searchSubject.next(this.needle)
   }
 
+  clearInput(){
+    this.needle = "";
+    this.searchSubject.next(this.needle)
+  }
+
   ngOnInit() {
   }
 

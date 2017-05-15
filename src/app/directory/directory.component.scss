@@ -67,12 +67,24 @@
 
     // search
     .app-directory-search{
+        position: relative;
         input{
            @extend %__dropdown;
            padding: 0 8px;
            border: none;
            box-shadow: none;
            background-color: $app-dir-color-nuance;
+        }
+        span{
+            position: absolute;
+            right: 2%;
+            height: $app-dir-line-height +6px;
+            line-height: $app-dir-line-height +6px;
+            cursor: pointer;
+            padding: 0 16px;
+            &:hover{
+                color: $app-dir-color-main;
+            }
         }
     }
 

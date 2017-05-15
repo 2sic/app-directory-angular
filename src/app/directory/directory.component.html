@@ -3,6 +3,7 @@
         <div class="app-directory-search">
             <div class="col-xs-12 col-md-7">
                 <h3>Suche</h3>
+                <span (click)="clearInput()">X</span>
                 <input [(ngModel)]="needle" (keyup)="search()" type="text" id="app-directory-search" placeholder="z.B. Firma, Ort oder Branche">
             </div>
         </div>
