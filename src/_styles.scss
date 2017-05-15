@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+// later on it's usually better to use variables from the skins
+// so that you can re-build the css using the same values used in the skin
+// it would then look a bit like this:
+//@import "../../../../_default/skins/AGV-SW/src/_variables.scss";
+
+// project related variables - can be purged afterwards and will be replaced by the variables defined in the skin.
+$brand-primary: #009a5a;
+$color-light: #fff;
+$color-dark: #000;
+$color-nuance: rgba(0, 0, 0, .1);
+$line-height: 32px;
+$font-size-h1: 65px;
+$font-size-h3: 24px;
+$font-base: 18px;
+$opacity: 0.8;
+$screen-sm-max: 991px;
+$screen-md-min: 992px;
+
+// app related variables
+$app-dir-color-nuance: $color-nuance;
+$app-dir-font-size: $font-base;
+$app-dir-color-main: $brand-primary;
+$app-dir-opacity: $opacity;
+$app-dir-color-light: $color-light;
+$app-dir-color-dark: $color-dark;
+$app-dir-line-height: $line-height;
+$app-dir-image-line-height: 216px;
