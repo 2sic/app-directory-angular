@@ -12,7 +12,7 @@ import { debounce } from "rxjs/operator/debounce";
   templateUrl: './directory.component.html',
   styleUrls: ['./directory.component.scss']
 })
-export class DirectoryComponent implements OnInit {
+export class DirectoryComponent {
   groups: any[];
   department: string;
   letter: string;
@@ -34,7 +34,7 @@ export class DirectoryComponent implements OnInit {
         this.department = this.letter = undefined;
         this.router.navigate(['/search', needle]);
       });
-    
+
     Observable.combineLatest(
       this.directory.entries,
       route.params
@@ -57,15 +57,6 @@ export class DirectoryComponent implements OnInit {
   }
 
   search() {
-    this.searchSubject.next(this.needle)
+    this.searchSubject.next(this.needle);
   }
-
-  clearInput(){
-    this.needle = "";
-    this.searchSubject.next(this.needle)
-  }
-
-  ngOnInit() {
-  }
-
 }

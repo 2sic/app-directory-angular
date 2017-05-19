@@ -73,6 +73,7 @@
            padding: 0 8px;
            border: none;
            box-shadow: none;
+           border-radius: 4px;
            background-color: $app-dir-color-nuance;
         }
         span{
@@ -93,6 +94,7 @@
         select{
             @extend %__dropdown;
             @extend %__select;
+            border-radius: 4px;
             option{
                 @extend %__dropdown;
                 @extend %__select;
