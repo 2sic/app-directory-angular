@@ -32,5 +32,4 @@ export class GroupPipe implements PipeTransform {
       }, [])
       .filter(g => !needle || g.entries.length > 0);
   }
-
 }
