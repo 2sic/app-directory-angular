@@ -5,6 +5,7 @@
     background: $app-dir-color-main; // fallback
     background: rgba($app-dir-color-main, $app-dir-opacity)
 }
+
 @mixin color-opacity($app-dir-color-main, $app-dir-opacity){
     color: $app-dir-color-main;
     color: rgba($app-dir-color-main, $app-dir-opacity)

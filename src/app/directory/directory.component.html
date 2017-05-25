@@ -10,7 +10,7 @@
         <div class="app-directory-dropdown">
             <div class="col-xs-12 col-md-5">
                 <h3>Nach Branche filtern</h3>
-                <select id="app-directory-dropdown" [(ngModel)]="department" (change)="changeDepartment()">
+                <select id="app-directory-dropdown" [(ngModel)]="department" (ngModelChange)="changeDepartment()">
                     <option value="alle" selected>Branche wählen</option>
                     <option *ngFor="let d of departments" [value]="d.Title">{{d.Title}}</option>
                 </select>

@@ -1,3 +1,3 @@
 export class Department {
-    title: string
+    Title: string
 }

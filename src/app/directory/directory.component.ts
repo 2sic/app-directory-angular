@@ -31,16 +31,16 @@ export class DirectoryComponent {
     this.searchSubject
       .debounceTime(400)
       .subscribe(needle => {
-        this.department = this.letter = undefined;
+        // this.department = this.letter = 'alle';
         this.router.navigate(['/search', needle]);
       });
-
+    
     Observable.combineLatest(
       this.directory.entries,
       route.params
     ).subscribe(([entries, params]) => {
-      this.department = params['department'];
-      this.letter = params['letter'];
+      this.department = params['department'] || 'alle';
+      this.letter = params['letter'] || 'alle';
       this.needle = params['needle'];
       this.groups = this.groupFilter.transform(entries, this.letter, this.department, this.needle);
     });

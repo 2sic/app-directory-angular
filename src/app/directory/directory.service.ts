@@ -39,7 +39,7 @@ export class DirectoryService {
       }))
       .subscribe(entries => this.entrySubject.next(entries));
   }
-
+  
   private getDeparmentEntries(): void {
     this.http.get(`${this.base + this.path}/Department`, { headers: this.headers })
     .subscribe(res => this.departmentSubject.next(res.json()));
