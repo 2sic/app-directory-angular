@@ -7,6 +7,7 @@ import { SelectModule } from 'ng2-select';
 import { DirectoryComponent } from './directory.component';
 import { DirectoryService } from "app/directory/directory.service";
 import { GroupPipe } from './group.pipe';
+import { ContentResourceFactory } from "@2sic.com/sxc-angular/sxc-content.service";
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { GroupPipe } from './group.pipe';
   providers: [
     DirectoryService,
     GroupPipe,
+    ContentResourceFactory,
     { provide: 'alphabet', useValue: ['1-10', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'] }
   ]
 })

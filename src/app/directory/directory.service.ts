@@ -3,7 +3,7 @@ import { Http, RequestOptions, Headers } from "@angular/http";
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { ContentResourceFactory } from '@2sic.com/sxc-angular';
+import { ContentResourceFactory } from '@2sic.com/sxc-angular/sxc-content.service';
 
 import { DirectoryEntry } from "app/directory/directory-entry";
 import { Department } from "app/directory/department";
@@ -22,8 +22,8 @@ export class DirectoryService {
   private departmentSubject: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>([]);
 
   constructor(
-    private http: Http, 
-    private crf: ContentResourceFactory 
+    private http: Http,
+    private crf: ContentResourceFactory
   ) {
     this.departments = this.departmentSubject.asObservable();
     this.entries = this.entrySubject.asObservable();
@@ -43,12 +43,8 @@ export class DirectoryService {
   }
 
   private getDeparmentEntries(): void {
-    crf.resource("Person").get()
-      .subscribe(res => {
-        console.log('got person', res);
-      })
-
-    this.http.get(`${this.base + this.path}/Department`, { headers: this.headers })
+    this.crf.resource("Department").get()
       .subscribe(res => this.departmentSubject.next(res.json()));
+    // this.http.get(`${this.base + this.path}/Department`, { headers: this.headers })
   }
 }
