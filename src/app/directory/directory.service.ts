@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from "@angular/http";
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+import { ContentResourceFactory } from '@2sic.com/sxc-angular/sxc-content.service';
 
 import { DirectoryEntry } from "app/directory/directory-entry";
 import { Department } from "app/directory/department";
@@ -11,17 +12,18 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 @Injectable()
 export class DirectoryService {
   entries: Observable<DirectoryEntry[]>;
-  departments : Observable<Department[]>;
+  departments: Observable<Department[]>;
   base: string = 'http://agv-sw2017.60.2sic.net';
   path: string = '/DesktopModules/2sxc/API/app/auto/content';
 
   private headers: Headers = new Headers();
-  
+
   private entrySubject: BehaviorSubject<DirectoryEntry[]> = new BehaviorSubject<DirectoryEntry[]>([]);
   private departmentSubject: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>([]);
 
   constructor(
-    private http: Http
+    private http: Http,
+    private crf: ContentResourceFactory
   ) {
     this.departments = this.departmentSubject.asObservable();
     this.entries = this.entrySubject.asObservable();
@@ -30,7 +32,7 @@ export class DirectoryService {
     this.getDirectoryItems();
     this.getDeparmentEntries();
   }
-  
+
   private getDirectoryItems(): void {
     this.http.get(`${this.base + this.path}/DirectoryItem`, { headers: this.headers })
       .map(res => res.json().map((entry: DirectoryEntry) => {
@@ -41,7 +43,8 @@ export class DirectoryService {
   }
   
   private getDeparmentEntries(): void {
-    this.http.get(`${this.base + this.path}/Department`, { headers: this.headers })
-    .subscribe(res => this.departmentSubject.next(res.json()));
+    this.crf.resource("Department").get()
+      .subscribe(res => this.departmentSubject.next(res.json()));
+    // this.http.get(`${this.base + this.path}/Department`, { headers: this.headers })
   }
 }
