@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject, ElementRef } from '@angular/core';
 import { DirectoryService } from "app/directory/directory.service";
 import { DirectoryEntry } from "app/directory/directory-entry";
 import { ActivatedRoute, Params, Router } from "@angular/router";
@@ -6,6 +6,8 @@ import { Observable, Subject } from "rxjs";
 import { GroupPipe } from "app/directory/group.pipe";
 import { Department } from "app/directory/department";
 import { debounce } from "rxjs/operator/debounce";
+import { SxcAppComponent } from '@2sic.com/sxc-angular/sxc-app.component'
+import { SxcAngularService } from "@2sic.com/sxc-angular/sxc-angular.service";
 
 @Component({
   selector: 'app-directory',
@@ -26,7 +28,9 @@ export class DirectoryComponent {
     private route: ActivatedRoute,
     private router: Router,
     private groupFilter: GroupPipe,
-    @Inject('alphabet') private alphabet: string[]
+    element: ElementRef,
+    sxcNg: SxcAngularService,
+    @Inject('alphabet') public alphabet: string[]
   ) {
     this.searchSubject
       .debounceTime(400)

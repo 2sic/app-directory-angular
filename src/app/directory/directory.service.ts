@@ -32,9 +32,9 @@ export class DirectoryService {
     this.getDirectoryItems();
     this.getDeparmentEntries();
   }
-
+  
   private getDirectoryItems(): void {
-    this.http.get(`${this.base + this.path}/DirectoryItem`, { headers: this.headers })
+    this.crf.resource("DirectoryItem").get()
       .map(res => res.json().map((entry: DirectoryEntry) => {
         entry.Logo = this.base + entry.Logo;
         return entry;
@@ -45,6 +45,5 @@ export class DirectoryService {
   private getDeparmentEntries(): void {
     this.crf.resource("Department").get()
       .subscribe(res => this.departmentSubject.next(res.json()));
-    // this.http.get(`${this.base + this.path}/Department`, { headers: this.headers })
   }
 }
