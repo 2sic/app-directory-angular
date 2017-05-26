@@ -7,7 +7,7 @@ import { GroupPipe } from "app/directory/group.pipe";
 import { Department } from "app/directory/department";
 import { debounce } from "rxjs/operator/debounce";
 import { SxcAppComponent } from '@2sic.com/sxc-angular/sxc-app.component'
-import { SxcAngularService } from "@2sic.com/sxc-angular/sxc-angular.service";
+import { DnnAngular } from "@2sic.com/sxc-angular/sxc-angular.service";
 
 @Component({
   selector: 'app-directory',
@@ -29,13 +29,11 @@ export class DirectoryComponent {
     private router: Router,
     private groupFilter: GroupPipe,
     element: ElementRef,
-    sxcNg: SxcAngularService,
     @Inject('alphabet') public alphabet: string[]
   ) {
     this.searchSubject
       .debounceTime(400)
       .subscribe(needle => {
-        // this.department = this.letter = 'alle';
         this.router.navigate(['/search', needle]);
       });
     

@@ -1,49 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from "@angular/http";
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { ContentResourceFactory } from '@2sic.com/sxc-angular/sxc-content.service';
 
 import { DirectoryEntry } from "app/directory/directory-entry";
 import { Department } from "app/directory/department";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { ContentResourceFactory } from "@2sic.com/sxc-angular/sxc-content.service";
 
 @Injectable()
 export class DirectoryService {
   entries: Observable<DirectoryEntry[]>;
   departments: Observable<Department[]>;
-  base: string = 'http://agv-sw2017.60.2sic.net';
-  path: string = '/DesktopModules/2sxc/API/app/auto/content';
-
-  private headers: Headers = new Headers();
 
   private entrySubject: BehaviorSubject<DirectoryEntry[]> = new BehaviorSubject<DirectoryEntry[]>([]);
   private departmentSubject: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>([]);
 
   constructor(
-    private http: Http,
     private crf: ContentResourceFactory
   ) {
     this.departments = this.departmentSubject.asObservable();
     this.entries = this.entrySubject.asObservable();
-    this.headers.append('ModuleId', '408');
-    this.headers.append('TabId', '73');
     this.getDirectoryItems();
     this.getDeparmentEntries();
   }
-  
+
   private getDirectoryItems(): void {
-    this.crf.resource("DirectoryItem").get()
-      .map(res => res.json().map((entry: DirectoryEntry) => {
-        entry.Logo = this.base + entry.Logo;
-        return entry;
-      }))
+    this.crf.resource('DirectoryItem').get()
+      .map(res => res.json().map(entry => <DirectoryEntry>entry))
       .subscribe(entries => this.entrySubject.next(entries));
   }
-  
+
   private getDeparmentEntries(): void {
-    this.crf.resource("Department").get()
+    this.crf.resource('Department').get()
       .subscribe(res => this.departmentSubject.next(res.json()));
   }
 }

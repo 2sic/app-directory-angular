@@ -26,7 +26,7 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@2sic.com/sxc-angular": "^1.0.1",
+    "@2sic.com/sxc-angular": "^1.0.2",
     "@angular/cli": "1.0.3",
     "@angular/compiler-cli": "^4.0.0",
     "@angular/router": "^4.1.2",

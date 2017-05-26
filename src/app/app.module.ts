@@ -7,9 +7,9 @@ import { RouterModule } from '@angular/router';
 import { DirectoryModule } from 'app/directory/directory.module';
 import { AppComponent } from './app.component';
 import { DirectoryComponent } from "app/directory/directory.component";
-import { SxcHttpProvider } from "@2sic.com/sxc-angular/sxc-http.provider";
-import { SxcAngularService } from "@2sic.com/sxc-angular/sxc-angular.service";
+import { DnnHttpProvider, SxcHttpProvider } from "@2sic.com/sxc-angular/sxc-http.provider";
 import { ContentResourceFactory } from "@2sic.com/sxc-angular/sxc-content.service";
+import { DnnAngular, SxcAngular } from "@2sic.com/sxc-angular/sxc-angular.service";
 
 const appRoutes = [
   {
@@ -25,7 +25,7 @@ const appRoutes = [
     path: 'search/:needle',
     component: DirectoryComponent
   }
-]
+] 
 
 @NgModule({
   declarations: [
@@ -39,8 +39,9 @@ const appRoutes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    SxcHttpProvider,
-    SxcAngularService,
+    SxcAngular,
+    DnnAngular,
+    DnnHttpProvider,
     ContentResourceFactory,
   ],
   bootstrap: [AppComponent]
