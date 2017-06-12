@@ -3,6 +3,7 @@ export class DirectoryEntry {
     Department: Department[];
     Link: string;
     Logo: string;
+    Town: string;
 }
 
 class Department {

@@ -1,4 +1,4 @@
-<main class="container app-directory-wrapper">
+<main class="app-directory-wrapper">
     <div class="row">
         <div class="app-directory-search">
             <div class="col-xs-12 col-md-7">
@@ -34,18 +34,20 @@
     <div class="app-directory-section">
         <div *ngFor="let group of groups" class="app-directory-group">
             <h3>{{group.label}}</h3>
-            <div class="app-directory-entry-wrapper row">
-                <div *ngFor="let entry of group.entries" class="app-directory-entry col-xs-6 col-md-3">
-                    <img [src]="entry.Logo" [alt]="entry.Title">
-                    <div class="app-directory-entry-info-wrapper">
-                        <a [href]="entry.Link" target="_blank">
-                            <span class="app-directory-entry-infos">
-                                <strong>{{entry.Title}}</strong>
-                                <span>{{entry.Department[0].Title}}</span>
-                                <span>{{entry.Link}}</span>
-                            </span>
-                        </a>
-                    </div>
+            <div class="row">
+                <div *ngFor="let entry of group.entries" class="col col-xs-4 col-md-3">
+                    <div class="app-directory-entry">
+                        <img [src]="entry.Logo" [alt]="entry.Title">
+                        <div class="app-directory-entry-info-wrapper">
+                            <a [href]="entry.Link" target="_blank">
+                                <span class="app-directory-entry-infos">
+                                    <strong>{{entry.Title}}</strong>
+                                    <span>{{entry.Department[0].Title}}</span>
+                                    <span>{{entry.LinkText}}</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>

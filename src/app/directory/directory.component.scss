@@ -31,10 +31,15 @@
                 line-height: $app-dir-line-height;
                 height: $app-dir-line-height; // fallback for ie
                 font-size: $font-size-h3;
-                font-weight: bold;
+                font-weight: normal;
+                font-family: Gibson-Bold;
                 color: $app-dir-color-main;
-                &:hover, &:focus, &:active{
+                &:hover {
                     @include color-opacity($app-dir-color-main, $app-dir-opacity);
+                    text-decoration: none;
+                }
+                &:focus, &:active{
+                    color: $app-dir-color-dark;
                     text-decoration: none;
                 }
             }
@@ -43,16 +48,19 @@
 
     h3{
         font-size: $font-size-h3;
-        font-weight: bold;
+        font-weight: normal;
     }
 
     // extensions
      %__dropdown{
         line-height: $app-dir-line-height;
-        height: $app-dir-line-height +6px;
+        height: 50px;
         width: 100%;
         &:focus{
             outline: none;
+        }
+        @media all and (max-width: $screen-xs-min){
+            height: 32px;
         }
      }
 
@@ -65,6 +73,21 @@
             @include background-opacity($app-dir-color-main, $app-dir-opacity);
         }
      }   
+
+     // wrapper
+
+    .app-directory-wrapper{ // remove for standardising
+        margin-top: -5px;
+    }
+
+    .app-directory-letterlist{ // remove for standardising
+        margin-top: 18px;
+        margin-bottom: 40px;
+         @media all and (max-width: $screen-xs-min){
+             margin-top: 0;
+             margin-bottom: 20px;
+         }
+    }
 
     // search
     .app-directory-search{
@@ -80,13 +103,17 @@
         span{
             position: absolute;
             right: 2%;
-            height: $app-dir-line-height +6px;
-            line-height: $app-dir-line-height +6px;
+            height: 50px;
+            line-height: 50px;
             cursor: pointer;
             padding: 0 16px;
             &:hover{
                 color: $app-dir-color-main;
             }
+             @media all and (max-width: $screen-xs-min){
+                line-height: 32px;
+                height: 32px;
+             }
         }
     }
 
@@ -104,10 +131,6 @@
     }
 
     // group entries
-    .app-directory-entry-wrapper{
-        margin-left: 0;
-        margin-right: 0;
-    }
 
     .app-directory-entry{
         padding: 0;
@@ -116,9 +139,12 @@
         text-align: center;
         line-height: $app-dir-image-line-height;
         height: $app-dir-image-line-height;
-        border: 1px dotted $app-dir-color-nuance;
+        border: 1px solid $app-dir-color-nuance;
+        margin-bottom: 14px;
+        width: 100%;
         img{
             vertical-align: middle;
+            max-width: 80%;
         }
     }
 
@@ -150,28 +176,27 @@
         strong{
             display: block;
             font-size: $font-size-h3;
+            font-weight: normal;
+            font-family: Gibson-Bold;
         }
         span{
             display: block;
         }
     }
 
-    @media all and (min-width: $screen-md-min){
-        .app-directory-entry{
-            line-height: $app-dir-image-line-height;
-            height: $app-dir-image-line-height;
-            width: 24%;
+    @media all and (max-width: $screen-xs-min){
+        .app-directory-entry-infos{
+            strong{
+                font-size: $font-size-h3*0.666;
+            }
         }
-        .app-directory-entry:nth-child(4n+1){
-            margin-right: 0.66%;
+        ul li a{
+            font-size: $font-size-h3*0.666;
         }
-        .app-directory-entry:nth-child(4n+2), .app-directory-entry:nth-child(4n+3){
-            margin: 0 0.66%;
+        h3 {
+            font-size: $font-size-h3*0.666;
         }
-        .app-directory-entry:nth-child(4n+4){
-            margin-left: 0.66%;
-        }
-    } 
+    }
 
     @media all and (max-width: $screen-sm-max){
         ul{
@@ -185,9 +210,63 @@
         }
     } 
 
-    @media all and (max-width: 500px){
+
+    @media all and (min-width: 1101px) and (max-width: 1450px) {
         .app-directory-entry{
-            width: 100%;
+            line-height: 160px;
+            height: 160px;
+        }   
+        .app-directory-entry-info-wrapper{
+            line-height: 32px;
+            height: 160px;
+            a{
+                margin-top: 10%;
+                font-size: 14px;
+            }
         }
     }
+    @media all and (min-width: $screen-md-min) and (max-width: 1100px){
+        .app-directory-entry{
+            line-height: 145px;
+            height: 145px;
+        }
+        .app-directory-entry-info-wrapper{
+            line-height: 32px;
+            height: 145px;
+            a{
+                margin-top: 10%;
+                font-size: 14px;
+            }
+        }
+    }
+    @media all and (min-width: 481px) and (max-width: $screen-xs-max){
+        .app-directory-entry{
+            line-height: 160px;
+            height: 160px;
+        }
+        .app-directory-entry-info-wrapper{
+            line-height: 32px;
+            height: 160px;
+            a{
+                margin-top: 10%;
+                font-size: 14px;
+            }
+        }   
+    }
+    @media all and (max-width: 480px){
+        .app-directory-entry{
+            line-height: 100px;
+            height: 100px;
+        }
+        .app-directory-entry-info-wrapper{
+            line-height: 20px;
+            height: 100px;
+            a{
+                margin-top: 7%;
+                font-size: 11px;
+            }
+        }
+}
+
+
 }

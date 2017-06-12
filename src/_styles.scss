@@ -11,11 +11,13 @@ $color-dark: #000;
 $color-nuance: rgba(0, 0, 0, .1);
 $line-height: 32px;
 $font-size-h1: 65px;
-$font-size-h3: 16px;
+$font-size-h3: 24px;
 $font-base: 18px;
 $opacity: 0.8;
 $screen-sm-max: 991px;
 $screen-md-min: 992px;
+$screen-xs-min: 480px;
+$screen-xs-max: 767px;
 
 // app related variables
 $app-dir-color-nuance: $color-nuance;
