@@ -46,7 +46,7 @@ export class GroupPipe implements PipeTransform {
         return t;
       }, [])
 
-      // hide unused letters if searching
-      .filter(g => !needle || g.entries.length > 0);
+      // hide unused letters
+      .filter(g => g.entries.length > 0);
   }
 }

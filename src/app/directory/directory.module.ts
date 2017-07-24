@@ -3,12 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from "@angular/router";
 import { SelectModule } from 'angular2-select';
-import { SxcHttpProvider } from "@2sic.com/sxc-angular/sxc-http.provider";
 
 import { DirectoryComponent } from './directory.component';
 import { DirectoryService } from "app/directory/directory.service";
 import { GroupPipe } from './group.pipe';
-import { ContentResourceFactory } from "@2sic.com/sxc-angular/sxc-content.service";
+import { ContentResourceFactory } from "@2sic.com/dnn-sxc-angular";
 
 @NgModule({
   imports: [

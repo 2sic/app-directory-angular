@@ -17,6 +17,17 @@
     <script type="text/javascript" src="/Portals/0/2sxc/Directory/polyfills.bundle.js"></script>
     <script type="text/javascript" src="/Portals/0/2sxc/Directory/vendor.bundle.js"></script>
     <script type="text/javascript" src="/Portals/0/2sxc/Directory/main.bundle.js"></script>
+
+    <!-- Prevent Form Submit-->
+    <script>
+        (function() {
+            var firstForm = document.querySelectorAll("form")[0];
+            if (!firstForm) return false;
+            firstForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+            });
+        })();
+    </script>
 </body>
 </body>
 

@@ -6,8 +6,6 @@ import { Observable, Subject } from "rxjs";
 import { GroupPipe } from "app/directory/group.pipe";
 import { Department } from "app/directory/department";
 import { debounce } from "rxjs/operator/debounce";
-import { SxcAppComponent } from '@2sic.com/sxc-angular/sxc-app.component'
-import { DnnAngular } from "@2sic.com/sxc-angular/sxc-angular.service";
 
 @Component({
   selector: 'app-directory',

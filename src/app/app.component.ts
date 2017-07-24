@@ -1,6 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { DnnAppComponent } from "@2sic.com/sxc-angular/sxc-app.component";
-import { DnnAngular } from "@2sic.com/sxc-angular/sxc-angular.service";
+import { DnnAppComponent, DnnAngular } from "@2sic.com/dnn-sxc-angular";
 
 @Component({
   selector: 'app-root',

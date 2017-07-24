@@ -53,14 +53,15 @@
 
     // extensions
      %__dropdown{
+        text-indent: 8px;
         line-height: $app-dir-line-height;
         height: 50px;
         width: 100%;
         &:focus{
             outline: none;
         }
-        @media all and (max-width: $screen-xs-min){
-            height: 32px;
+        @media all and (max-width: $screen-xs-max){
+            font-size: 16px;
         }
      }
 
@@ -69,9 +70,16 @@
         color: $app-dir-color-light;
         background-color: $app-dir-color-main;
         cursor: pointer;
-        &:hover, &:focus, &active{
+        &:hover, &:focus, &:active{
             @include background-opacity($app-dir-color-main, $app-dir-opacity);
         }
+        @media all and (max-width: $screen-sm-max){
+            color: $app-dir-color-dark;
+            background-color: $app-dir-color-nuance;
+            &:hover, &:focus, &:active{
+                background-color: $app-dir-color-nuance;
+            }
+        }  
      }   
 
      // wrapper
@@ -82,7 +90,7 @@
 
     .app-directory-letterlist{ // remove for standardising
         margin-top: 18px;
-        margin-bottom: 40px;
+        margin-bottom: 46px;
          @media all and (max-width: $screen-xs-min){
              margin-top: 0;
              margin-bottom: 20px;
@@ -93,12 +101,12 @@
     .app-directory-search{
         position: relative;
         input{
-           @extend %__dropdown;
-           padding: 0 8px;
-           border: none;
-           box-shadow: none;
-           border-radius: 4px;
-           background-color: $app-dir-color-nuance;
+            padding: 0 8px;
+            @extend %__dropdown;
+            border: none;
+            box-shadow: none;
+            border-radius: 4px;
+            background-color: $app-dir-color-nuance;
         }
         span{
             position: absolute;
@@ -110,10 +118,6 @@
             &:hover{
                 color: $app-dir-color-main;
             }
-             @media all and (max-width: $screen-xs-min){
-                line-height: 32px;
-                height: 32px;
-             }
         }
     }
 
@@ -127,10 +131,21 @@
                 @extend %__dropdown;
                 @extend %__select;
             }
+        }
+         @media all and (-webkit-min-device-pixel-ratio: 0){
+            ::i-block-chrome, select{
+                background-color: $app-dir-color-nuance;
+            }
         } 
     }
 
     // group entries
+    .app-directory-group {
+        h3{
+            margin-bottom: 12px;
+            margin-top: 15px;
+        }
+    }
 
     .app-directory-entry{
         padding: 0;
@@ -140,7 +155,7 @@
         line-height: $app-dir-image-line-height;
         height: $app-dir-image-line-height;
         border: 1px solid $app-dir-color-nuance;
-        margin-bottom: 14px;
+        margin-bottom: 20px;
         width: 100%;
         img{
             vertical-align: middle;
@@ -172,15 +187,17 @@
         }
     }
 
-    .app-directory-entry-infos{
+   .app-directory-entry-infos{
         strong{
             display: block;
             font-size: $font-size-h3;
+            color: $color-light;
             font-weight: normal;
             font-family: Gibson-Bold;
         }
         span{
             display: block;
+            color: $color-light;
         }
     }
 
@@ -198,7 +215,7 @@
         }
     }
 
-    @media all and (max-width: $screen-sm-max){
+    @media all and (max-width: $screen-md-max){
         ul{
             white-space: nowrap;
             overflow-x: auto;
@@ -206,6 +223,16 @@
                 a{
                     padding: 0 16px;
                 }
+            }
+            li:first-child {
+                a {
+                    padding-left: 0;
+                }
+            }   
+        }
+        .app-directory-entry{
+            img{
+                max-width: 66%;
             }
         }
     } 
@@ -266,7 +293,19 @@
                 font-size: 11px;
             }
         }
-}
-
-
+    }
+    @media all and (max-width: 360px){
+        .app-directory-entry{
+            line-height: 60px;
+            height: 60px;
+        }
+        .app-directory-entry-info-wrapper{
+            line-height: 20px;
+            height: 60px;
+            a{
+                margin-top: 3%;
+                font-size: 10px;
+            }
+        }
+    }
 }

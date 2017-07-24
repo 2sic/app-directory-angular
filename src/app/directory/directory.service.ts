@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import { DirectoryEntry } from "app/directory/directory-entry";
 import { Department } from "app/directory/department";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { ContentResourceFactory } from "@2sic.com/sxc-angular/sxc-content.service";
+import { ContentResourceFactory } from "@2sic.com/dnn-sxc-angular";
 
 @Injectable()
 export class DirectoryService {
@@ -26,13 +26,12 @@ export class DirectoryService {
   }
 
   private getDirectoryItems(): void {
-    this.crf.resource('DirectoryItem').get()
-      .map(res => res.json().map(entry => <DirectoryEntry>entry))
+    this.crf.resource<DirectoryEntry[]>('DirectoryItem').get()
       .subscribe(entries => this.entrySubject.next(entries));
   }
 
   private getDeparmentEntries(): void {
-    this.crf.resource('Department').get()
-      .subscribe(res => this.departmentSubject.next(res.json()));
+    this.crf.resource<Department[]>('Department').get()
+      .subscribe(entries => this.departmentSubject.next(entries));
   }
 }

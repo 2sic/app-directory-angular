@@ -7,9 +7,7 @@ import { RouterModule } from '@angular/router';
 import { DirectoryModule } from 'app/directory/directory.module';
 import { AppComponent } from './app.component';
 import { DirectoryComponent } from "app/directory/directory.component";
-import { DnnHttpProvider, SxcHttpProvider } from "@2sic.com/sxc-angular/sxc-http.provider";
-import { ContentResourceFactory } from "@2sic.com/sxc-angular/sxc-content.service";
-import { DnnAngular, SxcAngular } from "@2sic.com/sxc-angular/sxc-angular.service";
+import { SxcAngular, DnnHttpProvider, DnnAngular, ContentResourceFactory } from "@2sic.com/dnn-sxc-angular";
 
 const appRoutes = [
   {
