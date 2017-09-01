@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Subject } from "rxjs/Subject";
-import { Observable } from "rxjs/Observable";
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { DirectoryEntry } from "app/directory/directory-entry";
+import { DirectoryEntry } from 'app/directory/directory-entry';
 import { Department } from "app/directory/department";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { ContentResourceFactory } from "@2sic.com/dnn-sxc-angular";
