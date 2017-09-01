@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { SxcDataProvider, SxcHttpProvider } from '@2sic.com/dnn-sxc-angular';
 
 import { DirectoryModule } from 'app/directory/directory.module';
 import { AppComponent } from './app.component';
-import { DirectoryComponent } from "app/directory/directory.component";
-import { SxcAngular, DnnHttpProvider, DnnAngular, ContentResourceFactory } from "@2sic.com/dnn-sxc-angular";
+import { DirectoryComponent } from 'app/directory/directory.component';
 
 const appRoutes = [
   {
@@ -23,7 +23,7 @@ const appRoutes = [
     path: 'search/:needle',
     component: DirectoryComponent
   }
-] 
+]
 
 @NgModule({
   declarations: [
@@ -37,10 +37,8 @@ const appRoutes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    SxcAngular,
-    DnnAngular,
-    DnnHttpProvider,
-    ContentResourceFactory,
+    SxcHttpProvider,
+    SxcDataProvider,
   ],
   bootstrap: [AppComponent]
 })

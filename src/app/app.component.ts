@@ -1,16 +1,17 @@
+
 import { Component, ElementRef } from '@angular/core';
-import { DnnAppComponent, DnnAngular } from "@2sic.com/dnn-sxc-angular";
+import { SxcAngular, SxcAppComponent } from '@2sic.com/dnn-sxc-angular';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent extends DnnAppComponent {
+export class AppComponent extends SxcAppComponent {
   constructor(
     element: ElementRef,
-    dnnNg: DnnAngular,
+    sxcNg: SxcAngular,
   ) {
-    super(element, dnnNg);
+    super(element, sxcNg);
   }
 }

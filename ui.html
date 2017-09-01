@@ -1,0 +1,33 @@
+<!--
+<html>
+
+<head>
+    
+</head>
+
+<body>
+-->
+    <base href="/mitglieder/">
+
+    <app-root>loading...</app-root>
+    <script type="text/javascript" src="[App:Path]/dist/inline.bundle.js"></script>
+    <script type="text/javascript" src="[App:Path]/dist/polyfills.bundle.js"></script>
+    <script type="text/javascript" src="[App:Path]/dist/vendor.bundle.js"></script>
+    <script type="text/javascript" src="[App:Path]/dist/main.bundle.js"></script>
+
+    <!-- Prevent Form Submit-->
+    <script>
+        (function() {
+            var firstForm = document.querySelectorAll("form")[0];
+            if (!firstForm) return false;
+            firstForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+            });
+        })();
+    </script>
+<!-- 
+</body>
+</body>
+
+</html>
+-->
