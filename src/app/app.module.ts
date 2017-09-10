@@ -6,8 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { DirectoryModule } from 'app/directory/directory.module';
 import { AppComponent } from './app.component';
-import { DirectoryComponent } from "app/directory/directory.component";
-import { SxcAngular, DnnHttpProvider, DnnAngular, ContentResourceFactory } from "@2sic.com/dnn-sxc-angular";
+import { DirectoryComponent } from 'app/directory/directory.component';
+import { SxcAngular, DnnAngular, DnnHttpProvider, ContentResourceFactory } from '@2sic.com/dnn-sxc-angular';
 
 const appRoutes = [
   {
@@ -23,7 +23,7 @@ const appRoutes = [
     path: 'search/:needle',
     component: DirectoryComponent
   }
-] 
+]
 
 @NgModule({
   declarations: [

@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="@App.Path/dist/styles.css" data-enableoptimizations="true" />
+
+@{
+    var rndEntries = AsDynamic(App.Data["DirectoryItem"]).OrderBy(r => Guid.NewGuid()).Take(8);
+}
+
+<main class="app-directory-wrapper">
+    @Edit.Toolbar(toolbar: new object[] { 
+	    new { 
+            command = new { 
+    			action = "new", 
+    			contentType = "DirectoryItem"
+		    } 
+		},
+		new { 
+            command = new { 
+                action = "contentitems", 
+                contentType = "DirectoryItem"
+            },
+            showCondition = true
+		}
+	}, settings: new { hover="left", show = "hover" })
+     <div class="app-directory-section">
+         <div class="app-directory-group sc-element">
+              <div class="row">
+                @foreach(var entry in rndEntries){    
+                <div class="col col-xs-6 col-sm-4 col-lg-3" data-aos="fade-right">
+                    @Edit.Toolbar(entry)
+                    <div class="app-directory-entry">
+                    <img src="@entry.Logo?w=285&h=213" alt="@entry.Title">
+                        <div class="app-directory-entry-info-wrapper">
+                            <a href="@entry.Link" target="_blank">
+                                <span class="app-directory-entry-infos">
+                                    <strong>@entry.Title</strong>
+                                    <span>@entry.Department[0].Title</span>
+                                    <span>@entry.LinkText</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <p class="app-directory-closing">
+        <a href="/mitglieder">Alle Mitglieder anzeigen</a>
+    </p>
+</main>

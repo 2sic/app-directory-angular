@@ -4,15 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { DirectoryEntry } from 'app/directory/directory-entry';
-import { Department } from "app/directory/department";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { ContentResourceFactory } from "@2sic.com/dnn-sxc-angular";
+import { Department } from 'app/directory/department';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ContentResourceFactory } from '@2sic.com/dnn-sxc-angular';
 
 @Injectable()
 export class DirectoryService {
   entries: Observable<DirectoryEntry[]>;
   departments: Observable<Department[]>;
-
+  
   private entrySubject: BehaviorSubject<DirectoryEntry[]> = new BehaviorSubject<DirectoryEntry[]>([]);
   private departmentSubject: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>([]);
 
