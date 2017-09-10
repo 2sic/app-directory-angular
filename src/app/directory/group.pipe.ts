@@ -26,7 +26,7 @@ export class GroupPipe implements PipeTransform {
           label: c.toUpperCase(),
           entries: entries.filter((e: DirectoryEntry) => {
             if (needle
-
+              
               // not found in title
               && e.Title.toLocaleLowerCase().search(needle) === -1
 

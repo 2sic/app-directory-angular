@@ -34,7 +34,7 @@ export class DirectoryComponent {
       .subscribe(needle => {
         this.router.navigate(['/search', needle]);
       });
-    
+
     Observable.combineLatest(
       this.directory.entries,
       route.params

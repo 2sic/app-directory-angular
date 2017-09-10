@@ -7,7 +7,11 @@ import { SelectModule } from 'angular2-select';
 import { DirectoryComponent } from './directory.component';
 import { DirectoryService } from 'app/directory/directory.service';
 import { GroupPipe } from './group.pipe';
+<<<<<<< HEAD
 import { ContentResourceFactory } from '@2sic.com/dnn-sxc-angular';
+=======
+import { SxcDataProvider } from '@2sic.com/dnn-sxc-angular';
+>>>>>>> 4dda007d69375f780943edbc6afb2dc4396d0fad
 
 @NgModule({
   imports: [
@@ -25,7 +29,7 @@ import { ContentResourceFactory } from '@2sic.com/dnn-sxc-angular';
   ],
   providers: [
     DirectoryService,
-    ContentResourceFactory,
+    SxcDataProvider,
     GroupPipe,
     {
       provide: 'alphabet',
