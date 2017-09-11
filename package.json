@@ -9,11 +9,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "watch": "ng build --watch --prod --aot --output-hashing=none"
+    "watch": "ng build --watch --output-hashing=none",
+    "watchaot": "ng build --watch --prod --aot --output-hashing=none"
   },
   "private": true,
   "dependencies": {
-    "@2sic.com/dnn-sxc-angular": "1.0.4",
     "@angular/common": "4.3.6",
     "@angular/compiler": "4.3.6",
     "@angular/core": "4.3.6",
