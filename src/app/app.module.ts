@@ -5,26 +5,12 @@ import { RouterModule } from '@angular/router';
 
 import { DirectoryModule } from 'app/directory/directory.module';
 import { AppComponent } from './app.component';
-import { DirectoryComponent } from 'app/directory/directory.component';
 import { HttpHandler } from "@angular/common/http";
 import { DnnSxcModule } from "@2sic.com/dnn-sxc-angular";
 import { HttpClientModule } from "@angular/common/http";
+import { AppRoutes } from "app/app.routes";
 
-const appRoutes = [
-  {
-    path: 'filter/:department/:letter',
-    component: DirectoryComponent
-  },
-  {
-    path: '',
-    redirectTo: 'filter/alle/alle',
-    pathMatch: 'full'
-  },
-  {
-    path: 'search/:needle',
-    component: DirectoryComponent
-  }
-]
+
 
 @NgModule({
   declarations: [
@@ -36,7 +22,7 @@ const appRoutes = [
     BrowserModule,
     FormsModule,
     DirectoryModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(AppRoutes)
   ],
   bootstrap: [AppComponent]
 })
