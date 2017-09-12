@@ -1,32 +1,32 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SelectModule } from 'angular2-select';
  
 import { DirectoryComponent } from './directory.component';
-import { DirectoryService } from 'app/directory/directory.service';
-import { GroupPipe } from './group.pipe';
+import { DataService } from 'app/directory/directory.service';
 import { Data } from '@2sic.com/dnn-sxc-angular';
+import { FilteredItems } from "app/directory/filtered-items";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    SelectModule
+    SelectModule,
+    ReactiveFormsModule
   ],
   exports: [
     DirectoryComponent
   ],
   declarations: [
     DirectoryComponent,
-    GroupPipe
   ],
   providers: [
-    DirectoryService,
+    DataService,
+    FilteredItems,
     Data,
-    GroupPipe,
     {
       provide: 'alphabet',
       useValue: [

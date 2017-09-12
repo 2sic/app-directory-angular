@@ -11,7 +11,7 @@ import { Config } from "app/entities/config";
 import { i18n } from "app/entities/i18n";
 
 @Injectable()
-export class DirectoryService {
+export class DataService {
   entries: Observable<DirectoryItem[]>;
   industries: Observable<Industry[]>;
   config: Observable<Config>;
