@@ -8,6 +8,7 @@ import { HttpHandler } from "@angular/common/http";
 import { DnnSxcModule } from "@2sic.com/dnn-sxc-angular";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "app/app-routing.module";
+import { RouteReuseProvider } from "app/route-reuse-strategy";
 
 
 
@@ -20,8 +21,11 @@ import { AppRoutingModule } from "app/app-routing.module";
     HttpClientModule, // important - this changed in Angular 4.3
     BrowserModule,
     DirectoryModule,
-    AppRoutingModule
+    AppRoutingModule  // always have this as the very last import! - https://angular.io/guide/router#module-import-order-matters
     // RouterModule.forRoot(AppRoutes, { enableTracing: true })
+  ],
+  providers:[
+    RouteReuseProvider
   ],
   bootstrap: [AppComponent]
 })

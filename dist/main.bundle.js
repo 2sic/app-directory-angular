@@ -25,12 +25,14 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_component__ = __webpack_require__("../../../../../src/app/directory/directory.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_route_reuse_strategy__ = __webpack_require__("../../../../../src/app/route-reuse-strategy.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -61,12 +63,15 @@ var AppRoutingModule = (function () {
 AppRoutingModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModule"])({
         imports: [
-            __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */].forRoot(appRoutes
+            __WEBPACK_IMPORTED_MODULE_0__angular_router__["d" /* RouterModule */].forRoot(appRoutes
             // { enableTracing: true } // <-- debugging purposes only
             )
         ],
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_3_app_route_reuse_strategy__["b" /* RouteReuseSameStrategy */]
+        ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */]
+            __WEBPACK_IMPORTED_MODULE_0__angular_router__["d" /* RouterModule */]
         ]
     })
 ], AppRoutingModule);
@@ -161,12 +166,14 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/index.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_app_route_reuse_strategy__ = __webpack_require__("../../../../../src/app/route-reuse-strategy.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -189,8 +196,11 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["c" /* HttpClientModule */],
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2_app_directory_directory_module__["a" /* DirectoryModule */],
-            __WEBPACK_IMPORTED_MODULE_6_app_app_routing_module__["a" /* AppRoutingModule */]
+            __WEBPACK_IMPORTED_MODULE_6_app_app_routing_module__["a" /* AppRoutingModule */] // always have this as the very last import! - https://angular.io/guide/router#module-import-order-matters
             // RouterModule.forRoot(AppRoutes, { enableTracing: true })
+        ],
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_7_app_route_reuse_strategy__["a" /* RouteReuseProvider */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
     })
@@ -304,7 +314,7 @@ DirectoryComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/directory/directory.component.scss")]
     }),
     __param(4, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])('alphabet')),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_service__["a" /* DataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_service__["a" /* DataService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_app_directory_filtered_items__["a" /* FilteredItems */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_directory_filtered_items__["a" /* FilteredItems */]) === "function" && _d || Object, Array])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_service__["a" /* DataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_service__["a" /* DataService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_app_directory_filtered_items__["a" /* FilteredItems */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_directory_filtered_items__["a" /* FilteredItems */]) === "function" && _d || Object, Array])
 ], DirectoryComponent);
 
 var _a, _b, _c, _d;
@@ -351,7 +361,7 @@ DirectoryModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         imports: [
             __WEBPACK_IMPORTED_MODULE_2__angular_common__["CommonModule"],
-            __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* RouterModule */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_router__["d" /* RouterModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormsModule"],
             __WEBPACK_IMPORTED_MODULE_4_angular2_select__["SelectModule"],
             __WEBPACK_IMPORTED_MODULE_1__angular_forms__["ReactiveFormsModule"]
@@ -578,6 +588,41 @@ var i18n = (function () {
 }());
 
 //# sourceMappingURL=i18n.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/route-reuse-strategy.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return RouteReuseSameStrategy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RouteReuseProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+
+var RouteReuseSameStrategy = (function () {
+    function RouteReuseSameStrategy() {
+    }
+    // from default route strategy, as it can't be inherited...
+    RouteReuseSameStrategy.prototype.shouldDetach = function (route) { return false; };
+    RouteReuseSameStrategy.prototype.store = function (route, detachedTree) { };
+    RouteReuseSameStrategy.prototype.shouldAttach = function (route) { return false; };
+    RouteReuseSameStrategy.prototype.retrieve = function (route) { return null; };
+    RouteReuseSameStrategy.prototype.super_shouldReuseRoute = function (future, curr) {
+        return future.routeConfig === curr.routeConfig;
+    };
+    RouteReuseSameStrategy.prototype.shouldReuseRoute = function (future, curr) {
+        var isSame = future.component == curr.component;
+        // let name = future.component && (<any>future.component).name;
+        return isSame || this.super_shouldReuseRoute(future, curr); // && name !== 'DetailSameComponent';
+    };
+    return RouteReuseSameStrategy;
+}());
+
+var RouteReuseProvider = {
+    provide: __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouteReuseStrategy */],
+    useClass: RouteReuseSameStrategy
+};
+//# sourceMappingURL=route-reuse-strategy.js.map
 
 /***/ }),
 
