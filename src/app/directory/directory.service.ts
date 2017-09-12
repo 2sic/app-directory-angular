@@ -7,28 +7,25 @@ import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Data } from '@2sic.com/dnn-sxc-angular';
 import { Industry } from "../entities/industry";
+import { Config } from "app/entities/config";
+import { i18n } from "app/entities/i18n";
 
 @Injectable()
 export class DirectoryService {
   entries: Observable<DirectoryItem[]>;
-  departments: Observable<Industry[]>;
+  industries: Observable<Industry[]>;
+  config: Observable<Config>;
+  i18n: Observable<i18n>;
   
-  private entrySubject: BehaviorSubject<DirectoryItem[]> = new BehaviorSubject<DirectoryItem[]>([]);
-  private departmentSubject: BehaviorSubject<Industry[]> = new BehaviorSubject<Industry[]>([]);
-
   constructor(
     private sxcData: Data
   ) {
-    this.departments = this.departmentSubject.asObservable();
-    this.entries = this.entrySubject.asObservable();
-    this.preloadEverything();
-  }
-
-  private preloadEverything(): void {
-    this.sxcData.content<DirectoryItem>('DirectoryItem').get()
-      .subscribe(entries => this.entrySubject.next(entries));
-
-      this.sxcData.content<Industry>('Industry').get()
-      .subscribe(entries => this.departmentSubject.next(entries));
+    this.industries = this.sxcData.content<Industry>('Industry').get()
+      .startWith(new Array<Industry>());
+    this.entries =  this.sxcData.content<DirectoryItem>('DirectoryItem').get()
+      .startWith(new Array<DirectoryItem>());
+    const config$ = this.sxcData.query<Config>("Config").get();
+    this.config = config$.startWith(new Config());
+    this.i18n = this.config.map(c => c.Resources[0]);
   }
 }

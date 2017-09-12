@@ -164,7 +164,7 @@ AppModule = __decorate([
 /***/ "../../../../../src/app/directory/directory.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<main class=\"app-directory-wrapper\">\r\n    <div class=\"row\">\r\n        <div class=\"app-directory-search\">\r\n            <div class=\"col-xs-12 col-md-7\">\r\n                <h3>Suche</h3>\r\n                <span (click)=\"changeDepartment()\">X</span>\r\n                <input [(ngModel)]=\"needle\" (ngModelChange)=\"search()\" type=\"text\" id=\"app-directory-search\" placeholder=\"z.B. Firma, Ort oder Branche\">\r\n            </div>\r\n        </div>\r\n        <div class=\"app-directory-dropdown\">\r\n            <div class=\"col-xs-12 col-md-5\">\r\n                <h3>Nach Branche filtern</h3>\r\n                <select id=\"app-directory-dropdown\" [(ngModel)]=\"department\" (ngModelChange)=\"changeDepartment()\">\r\n                    <option value=\"alle\" selected>Branche wählen</option>\r\n                    <option *ngFor=\"let d of departments\" [value]=\"d.Title\">{{d.Title}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-letterlist\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <ul>\r\n                    <li>\r\n                        <a [routerLink]=\"['/']\">Alle</a>\r\n                    </li>\r\n                    <li *ngFor=\"let letter of alphabet\">\r\n                        <a [routerLink]=\"['/filter', department, letter]\">{{letter}}</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-section\">\r\n        <div *ngFor=\"let group of groups\" class=\"app-directory-group\">\r\n            <h3>{{group.label}}</h3>\r\n            <div class=\"row\">\r\n                <div *ngFor=\"let entry of group.entries\" class=\"col col-xs-6 col-md-3\" data-aos=\"fade-up\">\r\n                    <div class=\"app-directory-entry\">\r\n                        <img [src]=\"entry.Logo\" [alt]=\"entry.Title\">\r\n                        <div class=\"app-directory-entry-info-wrapper\">\r\n                            <a [href]=\"entry.Link\" target=\"_blank\">\r\n                                <span class=\"app-directory-entry-infos\">\r\n                                    <strong>{{entry.Title}}</strong>\r\n                                    <span>{{entry.Industry[0].Title}}</span>\r\n                                    <span>{{entry.LinkText}}</span>\r\n                                </span>\r\n                            </a>\r\n                        </div>\r\n                    </div> \r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>"
+module.exports = "<main class=\"app-directory-wrapper\">\r\n    <div class=\"row\">\r\n        <div class=\"app-directory-search\">\r\n            <div class=\"col-xs-12 col-md-7\">\r\n                <h3>{{(i18n|async)?.SearchLabel}}</h3>\r\n                <span (click)=\"changeDepartment()\">X</span>\r\n                <input [(ngModel)]=\"needle\" (ngModelChange)=\"search()\" type=\"text\" id=\"app-directory-search\" placeholder=\"{{(i18n|async)?.SearchPlaceholder}}\">\r\n            </div>\r\n        </div>\r\n        <div class=\"app-directory-dropdown\">\r\n            <div class=\"col-xs-12 col-md-5\">\r\n                <h3>{{(i18n|async)?.IndustryLabel}}</h3>\r\n                <select id=\"app-directory-dropdown\" [(ngModel)]=\"department\" (ngModelChange)=\"changeDepartment()\">\r\n                    <option value=\"alle\" selected>{{(i18n|async)?.IndustryAll}}</option>\r\n                    <option *ngFor=\"let d of departments\" [value]=\"d.Title\">{{d.Title}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-letterlist\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <ul>\r\n                    <li>\r\n                        <a [routerLink]=\"['/']\">{{(i18n|async)?.AZBarAll}}</a>\r\n                    </li>\r\n                    <li *ngFor=\"let letter of alphabet\">\r\n                        <a [routerLink]=\"['/filter', department, letter]\">{{letter}}</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-section\">\r\n        <div *ngFor=\"let group of groups\" class=\"app-directory-group\">\r\n            <h3>{{group.label}}</h3>\r\n            <div class=\"row\">\r\n                <div *ngFor=\"let entry of group.entries\" class=\"col col-xs-6 col-md-3\" data-aos=\"fade-up\">\r\n                    <div class=\"app-directory-entry\">\r\n                        <img [src]=\"entry.Logo\" [alt]=\"entry.Title\">\r\n                        <div class=\"app-directory-entry-info-wrapper\">\r\n                            <a [href]=\"entry.Link\" target=\"_blank\">\r\n                                <span class=\"app-directory-entry-infos\">\r\n                                    <strong>{{entry.Title}}</strong>\r\n                                    <span>{{entry.Industry[0].Title}}</span>\r\n                                    <span>{{entry.LinkText}}</span>\r\n                                </span>\r\n                            </a>\r\n                        </div>\r\n                    </div> \r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>"
 
 /***/ }),
 
@@ -215,27 +215,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 var DirectoryComponent = (function () {
-    function DirectoryComponent(directory, route, router, groupFilter, element, alphabet) {
+    function DirectoryComponent(data, route, router, groupFilter, element, alphabet) {
         var _this = this;
-        this.directory = directory;
+        this.data = data;
         this.route = route;
         this.router = router;
         this.groupFilter = groupFilter;
         this.alphabet = alphabet;
         this.searchSubject = new __WEBPACK_IMPORTED_MODULE_3_rxjs__["Subject"]();
+        this.i18n = data.i18n.share();
         this.searchSubject
             .debounceTime(400)
             .subscribe(function (needle) {
             _this.router.navigate(['/search', needle]);
         });
-        __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].combineLatest(this.directory.entries, route.params).subscribe(function (_a) {
+        __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].combineLatest(this.data.entries, route.params).subscribe(function (_a) {
             var entries = _a[0], params = _a[1];
             _this.department = params['department'] || 'alle';
             _this.letter = params['letter'] || 'alle';
             _this.needle = params['needle'];
             _this.groups = _this.groupFilter.transform(entries, _this.letter, _this.department, _this.needle);
         });
-        directory.departments
+        data.industries
             .subscribe(function (departments) { return _this.departments = departments; });
     }
     DirectoryComponent.prototype.changeDepartment = function () {
@@ -368,9 +369,8 @@ DirectoryModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject__ = __webpack_require__("../../../../rxjs/BehaviorSubject.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_entities_config__ = __webpack_require__("../../../../../src/app/entities/config.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -387,24 +387,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DirectoryService = (function () {
     function DirectoryService(sxcData) {
         this.sxcData = sxcData;
-        this.entrySubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject__["BehaviorSubject"]([]);
-        this.departmentSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject__["BehaviorSubject"]([]);
-        this.departments = this.departmentSubject.asObservable();
-        this.entries = this.entrySubject.asObservable();
-        this.preloadEverything();
+        this.industries = this.sxcData.content('Industry').get()
+            .startWith(new Array());
+        this.entries = this.sxcData.content('DirectoryItem').get()
+            .startWith(new Array());
+        var config$ = this.sxcData.query("Config").get();
+        this.config = config$.startWith(new __WEBPACK_IMPORTED_MODULE_3_app_entities_config__["a" /* Config */]());
+        this.i18n = this.config.map(function (c) { return c.Resources[0]; });
     }
-    DirectoryService.prototype.preloadEverything = function () {
-        var _this = this;
-        this.sxcData.content('DirectoryItem').get()
-            .subscribe(function (entries) { return _this.entrySubject.next(entries); });
-        this.sxcData.content('Industry').get()
-            .subscribe(function (entries) { return _this.departmentSubject.next(entries); });
-    };
     return DirectoryService;
 }());
 DirectoryService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["b" /* Data */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["b" /* Data */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__2sic_com_dnn_sxc_angular__["b" /* Data */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__2sic_com_dnn_sxc_angular__["b" /* Data */]) === "function" && _a || Object])
 ], DirectoryService);
 
 var _a;
@@ -484,6 +479,44 @@ GroupPipe = __decorate([
 ], GroupPipe);
 
 //# sourceMappingURL=group.pipe.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/entities/config.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Config; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_app_entities_i18n__ = __webpack_require__("../../../../../src/app/entities/i18n.ts");
+
+var Config = (function () {
+    function Config() {
+        this.Resources = new Array(new __WEBPACK_IMPORTED_MODULE_0_app_entities_i18n__["a" /* i18n */]());
+    }
+    return Config;
+}());
+
+//# sourceMappingURL=config.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/entities/i18n.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return i18n; });
+var i18n = (function () {
+    function i18n() {
+        this.Title = "loading...";
+        this.SearchLabel = "...";
+        this.SearchPlaceholder = "";
+        this.IndustryLabel = "...";
+        this.AZBarAll = "*";
+    }
+    return i18n;
+}());
+
+//# sourceMappingURL=i18n.js.map
 
 /***/ }),
 

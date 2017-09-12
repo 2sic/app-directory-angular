@@ -6,6 +6,7 @@ import { Observable, Subject } from "rxjs";
 import { GroupPipe } from "app/directory/group.pipe";
 import { Industry } from "../entities/industry";
 import { debounce } from "rxjs/operator/debounce";
+import { i18n } from "app/entities/i18n";
 
 @Component({
   selector: 'app-directory',
@@ -18,17 +19,20 @@ export class DirectoryComponent {
   letter: string;
   needle: string;
   departments: Industry[];
+  i18n: Observable<i18n>;
 
   private searchSubject: Subject<string> = new Subject<string>();
 
   constructor(
-    private directory: DirectoryService,
+    private data: DirectoryService,
     private route: ActivatedRoute,
     private router: Router,
     private groupFilter: GroupPipe,
     element: ElementRef,
     @Inject('alphabet') public alphabet: string[]
   ) {
+    this.i18n = data.i18n.share();
+
     this.searchSubject
       .debounceTime(400)
       .subscribe(needle => {
@@ -36,7 +40,7 @@ export class DirectoryComponent {
       });
 
     Observable.combineLatest(
-      this.directory.entries,
+      this.data.entries,
       route.params
     ).subscribe(([entries, params]) => {
       this.department = params['department'] || 'alle';
@@ -45,7 +49,7 @@ export class DirectoryComponent {
       this.groups = this.groupFilter.transform(entries, this.letter, this.department, this.needle);
     });
 
-    directory.departments
+    data.industries
       .subscribe(departments => this.departments = departments);
   }
 
