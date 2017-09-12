@@ -53,8 +53,8 @@ export class DirectoryComponent {
     this.route.params.subscribe(params => {
       this.department = params['department'] || 'all';
       this.letter = params['letter'] || 'all';
-      // let tempNeedle = params['needle'];
-      // if(tempNeedle) this.term.patchValue(tempNeedle);
+      let tempNeedle = params['needle'];
+      if(tempNeedle) this.term.patchValue(tempNeedle);
     });
 
   }
@@ -66,7 +66,7 @@ export class DirectoryComponent {
     this.router.navigate(['/list', this.department, this.letter]);
   }
 
-  search() {
-    // this.searchSubject.next(this.needle);
-  }
+  // search() {
+  //   // this.searchSubject.next(this.needle);
+  // }
 }

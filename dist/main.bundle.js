@@ -290,8 +290,9 @@ var DirectoryComponent = (function () {
         this.route.params.subscribe(function (params) {
             _this.department = params['department'] || 'all';
             _this.letter = params['letter'] || 'all';
-            // let tempNeedle = params['needle'];
-            // if(tempNeedle) this.term.patchValue(tempNeedle);
+            var tempNeedle = params['needle'];
+            if (tempNeedle)
+                _this.term.patchValue(tempNeedle);
         });
     }
     DirectoryComponent.prototype.changeDepartment = function () {
@@ -301,9 +302,6 @@ var DirectoryComponent = (function () {
         if (!this.letter)
             this.letter = 'all';
         this.router.navigate(['/list', this.department, this.letter]);
-    };
-    DirectoryComponent.prototype.search = function () {
-        // this.searchSubject.next(this.needle);
     };
     return DirectoryComponent;
 }());
