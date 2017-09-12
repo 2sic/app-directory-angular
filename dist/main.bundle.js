@@ -164,7 +164,7 @@ AppModule = __decorate([
 /***/ "../../../../../src/app/directory/directory.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<main class=\"app-directory-wrapper\">\r\n    <div class=\"row\">\r\n        <div class=\"app-directory-search\">\r\n            <div class=\"col-xs-12 col-md-7\">\r\n                <h3>Suche</h3>\r\n                <span (click)=\"changeDepartment()\">X</span>\r\n                <input [(ngModel)]=\"needle\" (ngModelChange)=\"search()\" type=\"text\" id=\"app-directory-search\" placeholder=\"z.B. Firma, Ort oder Branche\">\r\n            </div>\r\n        </div>\r\n        <div class=\"app-directory-dropdown\">\r\n            <div class=\"col-xs-12 col-md-5\">\r\n                <h3>Nach Branche filtern</h3>\r\n                <select id=\"app-directory-dropdown\" [(ngModel)]=\"department\" (ngModelChange)=\"changeDepartment()\">\r\n                    <option value=\"alle\" selected>Branche wählen</option>\r\n                    <option *ngFor=\"let d of departments\" [value]=\"d.Title\">{{d.Title}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-letterlist\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <ul>\r\n                    <li>\r\n                        <a [routerLink]=\"['/']\">Alle</a>\r\n                    </li>\r\n                    <li *ngFor=\"let letter of alphabet\">\r\n                        <a [routerLink]=\"['/filter', department, letter]\">{{letter}}</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-section\">\r\n        <div *ngFor=\"let group of groups\" class=\"app-directory-group\">\r\n            <h3>{{group.label}}</h3>\r\n            <div class=\"row\">\r\n                <div *ngFor=\"let entry of group.entries\" class=\"col col-xs-6 col-md-3\" data-aos=\"fade-up\">\r\n                    <div class=\"app-directory-entry\">\r\n                        <img [src]=\"entry.Logo\" [alt]=\"entry.Title\">\r\n                        <div class=\"app-directory-entry-info-wrapper\">\r\n                            <a [href]=\"entry.Link\" target=\"_blank\">\r\n                                <span class=\"app-directory-entry-infos\">\r\n                                    <strong>{{entry.Title}}</strong>\r\n                                    <span>{{entry.Department[0].Title}}</span>\r\n                                    <span>{{entry.LinkText}}</span>\r\n                                </span>\r\n                            </a>\r\n                        </div>\r\n                    </div> \r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>"
+module.exports = "<main class=\"app-directory-wrapper\">\r\n    <div class=\"row\">\r\n        <div class=\"app-directory-search\">\r\n            <div class=\"col-xs-12 col-md-7\">\r\n                <h3>Suche</h3>\r\n                <span (click)=\"changeDepartment()\">X</span>\r\n                <input [(ngModel)]=\"needle\" (ngModelChange)=\"search()\" type=\"text\" id=\"app-directory-search\" placeholder=\"z.B. Firma, Ort oder Branche\">\r\n            </div>\r\n        </div>\r\n        <div class=\"app-directory-dropdown\">\r\n            <div class=\"col-xs-12 col-md-5\">\r\n                <h3>Nach Branche filtern</h3>\r\n                <select id=\"app-directory-dropdown\" [(ngModel)]=\"department\" (ngModelChange)=\"changeDepartment()\">\r\n                    <option value=\"alle\" selected>Branche wählen</option>\r\n                    <option *ngFor=\"let d of departments\" [value]=\"d.Title\">{{d.Title}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-letterlist\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <ul>\r\n                    <li>\r\n                        <a [routerLink]=\"['/']\">Alle</a>\r\n                    </li>\r\n                    <li *ngFor=\"let letter of alphabet\">\r\n                        <a [routerLink]=\"['/filter', department, letter]\">{{letter}}</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-section\">\r\n        <div *ngFor=\"let group of groups\" class=\"app-directory-group\">\r\n            <h3>{{group.label}}</h3>\r\n            <div class=\"row\">\r\n                <div *ngFor=\"let entry of group.entries\" class=\"col col-xs-6 col-md-3\" data-aos=\"fade-up\">\r\n                    <div class=\"app-directory-entry\">\r\n                        <img [src]=\"entry.Logo\" [alt]=\"entry.Title\">\r\n                        <div class=\"app-directory-entry-info-wrapper\">\r\n                            <a [href]=\"entry.Link\" target=\"_blank\">\r\n                                <span class=\"app-directory-entry-infos\">\r\n                                    <strong>{{entry.Title}}</strong>\r\n                                    <span>{{entry.Industry[0].Title}}</span>\r\n                                    <span>{{entry.LinkText}}</span>\r\n                                </span>\r\n                            </a>\r\n                        </div>\r\n                    </div> \r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>"
 
 /***/ }),
 
@@ -391,17 +391,13 @@ var DirectoryService = (function () {
         this.departmentSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject__["BehaviorSubject"]([]);
         this.departments = this.departmentSubject.asObservable();
         this.entries = this.entrySubject.asObservable();
-        this.getDirectoryItems();
-        this.getDeparmentEntries();
+        this.preloadEverything();
     }
-    DirectoryService.prototype.getDirectoryItems = function () {
+    DirectoryService.prototype.preloadEverything = function () {
         var _this = this;
         this.sxcData.content('DirectoryItem').get()
             .subscribe(function (entries) { return _this.entrySubject.next(entries); });
-    };
-    DirectoryService.prototype.getDeparmentEntries = function () {
-        var _this = this;
-        this.sxcData.content('Department').get()
+        this.sxcData.content('Industry').get()
             .subscribe(function (entries) { return _this.departmentSubject.next(entries); });
     };
     return DirectoryService;
@@ -435,6 +431,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 
+/**
+ * A filter / pipe to limit the resulting list based on the filter criterias
+ */
 var GroupPipe = (function () {
     function GroupPipe(alphabet) {
         this.alphabet = alphabet;
@@ -461,10 +460,10 @@ var GroupPipe = (function () {
                     if (needle
                         && e.Title.toLocaleLowerCase().search(needle) === -1
                         && (!e.Town || e.Town.toLocaleLowerCase().search(needle) === -1)
-                        && (e.Department.length === 0 || e.Department[0].Title.toLocaleLowerCase().search(needle) === -1))
+                        && (e.Industry.length === 0 || e.Industry[0].Title.toLocaleLowerCase().search(needle) === -1))
                         return false;
                     // filter by department
-                    if (department && (e.Department.length === 0 || e.Department[0].Title !== department))
+                    if (department && (e.Industry.length === 0 || e.Industry[0].Title !== department))
                         return false;
                     // only the current letter
                     return isNum ? ~~e.Title[0] : (e.Title[0].toLocaleLowerCase() === c);

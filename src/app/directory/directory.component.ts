@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject, ElementRef } from '@angular/core';
 import { DirectoryService } from "app/directory/directory.service";
-import { DirectoryEntry } from "app/directory/directory-entry";
+import { DirectoryItem } from "../entities/directory-item";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import { GroupPipe } from "app/directory/group.pipe";
-import { Department } from "app/directory/department";
+import { Industry } from "../entities/industry";
 import { debounce } from "rxjs/operator/debounce";
 
 @Component({
@@ -17,7 +17,7 @@ export class DirectoryComponent {
   department: string;
   letter: string;
   needle: string;
-  departments: Department[];
+  departments: Industry[];
 
   private searchSubject: Subject<string> = new Subject<string>();
 

@@ -4,11 +4,13 @@
   var basePath = Link.To(parameters: randomxyz + "=1");
   basePath = basePath.Substring(0, basePath.IndexOf(randomxyz));
 }
-(@basePath)
 
-<base href="@basePath" hrefx="/directory-angular4/en-us/">
+<base href="@basePath">
 
-<app-root>loading...</app-root>
+<div class="sc-element">
+	@Edit.Toolbar()
+	<app-root>loading...</app-root>
+</div>
 <script src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js"></script>
 <script type="text/javascript" src="@App.Path/dist/inline.bundle.js"></script>
 <script type="text/javascript" src="@App.Path/dist/polyfills.bundle.js"></script>
@@ -16,6 +18,7 @@
 <script type="text/javascript" src="@App.Path/dist/main.bundle.js"></script>
 
 <!-- Prevent Form Submit -->
+<!-- todo: not a good solution! -->
 <script>
 	(function() {
 		var firstForm = document.querySelectorAll("form")[0];

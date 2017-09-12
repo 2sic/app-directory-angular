@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform, Inject } from '@angular/core';
-import { DirectoryEntry } from "app/directory/directory-entry";
+import { DirectoryItem } from "../entities/directory-item";
 
+/**
+ * A filter / pipe to limit the resulting list based on the filter criterias
+ */
 @Pipe({
   name: 'group'
 })
@@ -10,7 +13,7 @@ export class GroupPipe implements PipeTransform {
     @Inject('alphabet') private alphabet: string[]
   ) { }
 
-  transform(entries: DirectoryEntry[], firstChar: string = undefined, department: string = undefined, needle: string = undefined): DirectoryEntry[] {
+  transform(entries: DirectoryItem[], firstChar: string = undefined, department: string = undefined, needle: string = undefined): DirectoryItem[] {
     if (firstChar === 'alle') firstChar = undefined;
     if (department === 'alle') department = undefined;
     if (firstChar) firstChar = firstChar.toLocaleLowerCase();
@@ -24,7 +27,7 @@ export class GroupPipe implements PipeTransform {
         let isNum = c === '1-10';
         t.push({
           label: c.toUpperCase(),
-          entries: entries.filter((e: DirectoryEntry) => {
+          entries: entries.filter((e: DirectoryItem) => {
             if (needle
               
               // not found in title
@@ -34,10 +37,10 @@ export class GroupPipe implements PipeTransform {
               && (!e.Town || e.Town.toLocaleLowerCase().search(needle) === -1)
 
               // has no departments or not found in department
-              && (e.Department.length === 0 || e.Department[0].Title.toLocaleLowerCase().search(needle) === -1)) return false;
+              && (e.Industry.length === 0 || e.Industry[0].Title.toLocaleLowerCase().search(needle) === -1)) return false;
             
             // filter by department
-            if (department && (e.Department.length === 0 || e.Department[0].Title !== department)) return false;
+            if (department && (e.Industry.length === 0 || e.Industry[0].Title !== department)) return false;
 
             // only the current letter
             return isNum ? ~~e.Title[0] : (e.Title[0].toLocaleLowerCase() === c);
