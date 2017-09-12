@@ -7,7 +7,7 @@ import { SelectModule } from 'angular2-select';
 import { DirectoryComponent } from './directory.component';
 import { DirectoryService } from 'app/directory/directory.service';
 import { GroupPipe } from './group.pipe';
-import { Data } from '/projects/dnn-sxc-angular/src';
+import { Data } from '@2sic.com/dnn-sxc-angular';
 
 @NgModule({
   imports: [

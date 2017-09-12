@@ -1,6 +1,6 @@
 
 import { Component, ElementRef } from '@angular/core';
-import { Context, DnnAppComponent } from '/projects/dnn-sxc-angular/src';
+import { Context, DnnAppComponent } from '@2sic.com/dnn-sxc-angular';
 
 @Component({
   selector: 'app-root',

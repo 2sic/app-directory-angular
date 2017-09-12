@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { Data, DnnHttp, Context, DevContext } from '/projects/dnn-sxc-angular/src'
 
 import { DirectoryModule } from 'app/directory/directory.module';
 import { AppComponent } from './app.component';
 import { DirectoryComponent } from 'app/directory/directory.component';
+import { HttpHandler } from "@angular/common/http";
+import { DnnSxcModule } from "@2sic.com/dnn-sxc-angular";
+import { HttpClientModule } from "@angular/common/http";
 
 const appRoutes = [
   {
@@ -30,17 +31,12 @@ const appRoutes = [
     AppComponent
   ],
   imports: [
+    DnnSxcModule,     // DnnSxc module ensures all connectors are available
+    HttpClientModule, // important - this changed in Angular 4.3
     BrowserModule,
     FormsModule,
-    HttpModule,
     DirectoryModule,
     RouterModule.forRoot(appRoutes)
-  ],
-  providers: [
-    Context,
-    DevContext,
-    DnnHttp,
-    Data,
   ],
   bootstrap: [AppComponent]
 })

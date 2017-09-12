@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Data } from '/projects/dnn-sxc-angular/src';
+import { Data } from '@2sic.com/dnn-sxc-angular';
 
 @Injectable()
 export class DirectoryService {

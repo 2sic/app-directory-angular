@@ -1,0 +1,28 @@
+
+@{
+  var randomxyz = "this-should-never-exist-in-the-url";
+  var basePath = Link.To(parameters: randomxyz + "=1");
+  basePath = basePath.Substring(0, basePath.IndexOf(randomxyz));
+}
+(@basePath)
+
+<base href="@basePath" hrefx="/directory-angular4/en-us/">
+
+<app-root>loading...</app-root>
+<script src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js"></script>
+<script type="text/javascript" src="@App.Path/dist/inline.bundle.js"></script>
+<script type="text/javascript" src="@App.Path/dist/polyfills.bundle.js"></script>
+<script type="text/javascript" src="@App.Path/dist/vendor.bundle.js"></script>
+<script type="text/javascript" src="@App.Path/dist/main.bundle.js"></script>
+
+<!-- Prevent Form Submit -->
+<script>
+	(function() {
+		var firstForm = document.querySelectorAll("form")[0];
+		if (!firstForm) return false;
+		firstForm.addEventListener('submit', function(e) {
+			e.preventDefault();
+		});
+	})();
+</script>
+
