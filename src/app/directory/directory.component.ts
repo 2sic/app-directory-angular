@@ -2,12 +2,13 @@ import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular
 import { DirectoryData } from "app/directory/directory-data.service";
 import { DirectoryItem } from "../entities/directory-item";
 import { ActivatedRoute, Params, Router } from "@angular/router";
-import { Observable, Subject } from "rxjs";
+import { Observable } from "rxjs";
 import { Industry } from "../entities/industry";
 import { debounce } from "rxjs/operator/debounce";
 import { i18n } from "app/entities/i18n";
 import { FormControl } from "@angular/forms";
 import { GroupedItems } from "app/entities/grouped-items";
+import { AZLetter } from "app/entities/az-letter";
 
 @Component({
   selector: 'app-directory',
@@ -22,7 +23,10 @@ export class DirectoryComponent {
   industries$: Observable<Industry[]>;
   i18n$: Observable<i18n>;
   term = new FormControl(this.needle);
+  azList: Observable<AZLetter[]>;
   // private searchSubject: Subject<string> = new Subject<string>();
+
+  
 
   constructor(
     private data: DirectoryData,
@@ -32,7 +36,16 @@ export class DirectoryComponent {
   ) {
     this.industries$ = data.industries$;
     this.i18n$ = data.i18n$.share();
-    this.groups$ = data.groupsFilteredByRoute$(this.route);
+    this.groups$ = data.groupsFilteredByRoute$(this.route).share();
+
+    this.azList = this.groups$
+      .filter(grp => grp.length > 0) // skip empty sets
+      .take(1) // stop after the first delivery, to not change letters as the filters change
+      .map(grp => this.alphabet.map(letr => Object.assign(new AZLetter(), { 
+        Letter: letr, 
+        Active: grp.find(g => g.label.toLocaleLowerCase() == letr) 
+      } )));
+    
 
     // should work without a subject
     // this.searchSubject

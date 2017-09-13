@@ -25,8 +25,9 @@
                     <li>
                         <a [routerLink]="['/']">{{(i18n$ | async)?.AZBarAll}}</a>
                     </li>
-                    <li *ngFor="let letter of alphabet">
-                        <a [routerLink]="['/list', department, letter]">{{letter}}</a>
+                    <li *ngFor="let az of azList | async">
+                        <a *ngIf="az.Active" [routerLink]="['/list', department, az.Letter]" title="{{az.Active}}">{{az.Letter}}</a>
+                        <a *ngIf="!az.Active" href="#" class="disabled">{{az.Letter}}</a>
                     </li>
                 </ul>
             </div>

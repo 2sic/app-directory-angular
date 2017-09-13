@@ -42,6 +42,9 @@
                     color: $app-dir-color-dark;
                     text-decoration: none;
                 }
+                &.disabled{
+                    opacity: 0.2;
+                }
             }
         }
     }
