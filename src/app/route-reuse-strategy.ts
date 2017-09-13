@@ -1,5 +1,5 @@
 import { ActivatedRouteSnapshot, RouteReuseStrategy, DetachedRouteHandle } from '@angular/router';
-import { Provider } from "@angular/core/core";
+import { Provider } from '@angular/core/core';
 
 /**
  * This is a Routing-Strategy - it's the same as the default in Angular
@@ -21,7 +21,7 @@ export class RouteReuseSameStrategy implements RouteReuseStrategy {
     }
 
     shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-      let isSameComponent = future.component == curr.component;
+      const isSameComponent = future.component === curr.component;
       return isSameComponent || this.super_shouldReuseRoute(future, curr);
   }
 }
@@ -29,4 +29,4 @@ export class RouteReuseSameStrategy implements RouteReuseStrategy {
 export const RouteReuseProvider: Provider = {
     provide: RouteReuseStrategy,
     useClass: RouteReuseSameStrategy
-}
+};

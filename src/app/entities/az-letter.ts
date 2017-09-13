@@ -1,4 +1,4 @@
-export class AZLetter{
+export class AZLetter {
     Letter: string;
     Active: boolean;
 }

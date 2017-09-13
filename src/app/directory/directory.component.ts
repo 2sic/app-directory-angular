@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { DirectoryData } from "app/directory/directory-data.service";
-import { DirectoryItem } from "../entities/directory-item";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { Industry } from "../entities/industry";
-import { debounce } from "rxjs/operator/debounce";
-import { i18n } from "app/entities/i18n";
-import { FormControl } from "@angular/forms";
-import { GroupedItems } from "app/entities/grouped-items";
-import { AZLetter } from "app/entities/az-letter";
+import { DirectoryData } from 'app/directory/directory-data.service';
+import { DirectoryItem } from '../entities/directory-item';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Industry } from '../entities/industry';
+import { debounce } from 'rxjs/operator/debounce';
+import { I18n } from 'app/entities/i18n';
+import { FormControl } from '@angular/forms';
+import { GroupedItems } from 'app/entities/grouped-items';
+import { AZLetter } from 'app/entities/az-letter';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-directory',
@@ -21,12 +21,12 @@ export class DirectoryComponent {
   letter: string;
   needle: string;
   industries$: Observable<Industry[]>;
-  i18n$: Observable<i18n>;
+  i18n$: Observable<I18n>;
   term = new FormControl(this.needle);
   azList: Observable<AZLetter[]>;
   // private searchSubject: Subject<string> = new Subject<string>();
 
-  
+
 
   constructor(
     private data: DirectoryData,
@@ -41,11 +41,11 @@ export class DirectoryComponent {
     this.azList = this.groups$
       .filter(grp => grp.length > 0) // skip empty sets
       .take(1) // stop after the first delivery, to not change letters as the filters change
-      .map(grp => this.alphabet.map(letr => Object.assign(new AZLetter(), { 
-        Letter: letr, 
-        Active: grp.find(g => g.label.toLocaleLowerCase() == letr) 
+      .map(grp => this.alphabet.map(letr => Object.assign(new AZLetter(), {
+        Letter: letr,
+        Active: grp.find(g => g.label.toLocaleLowerCase() === letr)
       } )));
-    
+
 
     // should work without a subject
     // this.searchSubject
@@ -63,8 +63,8 @@ export class DirectoryComponent {
     this.route.params.subscribe(params => {
       this.department = params['department'] || 'all';
       this.letter = params['letter'] || 'all';
-      let tempNeedle = params['needle'];
-      this.term.patchValue(tempNeedle || "", { emitViewToModelChange: false, emitEvent: false });
+      const tempNeedle = params['needle'];
+      this.term.patchValue(tempNeedle || '', { emitViewToModelChange: false, emitEvent: false });
     });
 
   }

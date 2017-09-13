@@ -1,7 +1,7 @@
 
-import { i18n } from "app/entities/i18n";
+import { I18n } from 'app/entities/i18n';
 
 export class Config {
     Title: string;
-    Resources: i18n[] = new Array<i18n>(new i18n());
+    Resources: I18n[] = new Array<I18n>(new I18n());
 }

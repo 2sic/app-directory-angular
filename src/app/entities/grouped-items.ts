@@ -1,5 +1,5 @@
 
-import { DirectoryItem } from "./directory-item";
+import { DirectoryItem } from './directory-item';
 
 export class GroupedItems {
   label: string;

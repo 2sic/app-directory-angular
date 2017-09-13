@@ -1,3 +1,3 @@
 export class Industry {
-    Title: string
+    Title: string;
 }

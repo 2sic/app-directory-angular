@@ -2,12 +2,12 @@
 /**
  * language resources for our component
  */
-export class i18n {
-    Title: string = "loading...";
-    SearchLabel: string = "...";
-    SearchPlaceholder: string = "";
-    IndustryLabel: string = "...";
+export class I18n {
+    Title = 'loading...';
+    SearchLabel = '...';
+    SearchPlaceholder = '';
+    IndustryLabel = '...';
     // IndustryPlaceholder: string;
     IndustryAll: string;
-    AZBarAll: string = "*";
+    AZBarAll = '*';
 }

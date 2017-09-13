@@ -1,5 +1,5 @@
 
-import { Industry } from "./industry";
+import { Industry } from './industry';
 
 export class DirectoryItem {
     Title: string;

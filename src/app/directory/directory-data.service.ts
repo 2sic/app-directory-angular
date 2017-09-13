@@ -6,22 +6,22 @@ import 'rxjs/add/operator/map';
 import { Data } from '@2sic.com/dnn-sxc-angular';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Industry } from "../entities/industry";
-import { Config } from "app/entities/config";
-import { i18n } from "app/entities/i18n";
-import { ActivatedRoute } from "@angular/router";
-import { GroupedItems } from "app/entities/grouped-items";
+import { Industry } from '../entities/industry';
+import { Config } from 'app/entities/config';
+import { I18n } from 'app/entities/i18n';
+import { ActivatedRoute } from '@angular/router';
+import { GroupedItems } from 'app/entities/grouped-items';
 
 @Injectable()
 export class DirectoryData {
   entries$: Observable<DirectoryItem[]>;
   industries$: Observable<Industry[]>;
   config$: Observable<Config>;
-  i18n$: Observable<i18n>;
-  
+  i18n$: Observable<I18n>;
+
   constructor(
     private data: Data,
-    @Inject('alphabet') private alphabet: string[]    
+    @Inject('alphabet') private alphabet: string[]
   ) {
     this.industries$ = data.content$<Industry>('Industry')
       .startWith(new Array<Industry>());
@@ -30,7 +30,7 @@ export class DirectoryData {
       .startWith(new Array<DirectoryItem>());
 
       // config & i18n
-      const config$ = data.query$<Config>("Config");
+      const config$ = data.query$<Config>('Config');
       this.config$ = config$.startWith(new Config());
       this.i18n$ = this.config$.map(c => c.Resources[0]);
   }
@@ -43,7 +43,7 @@ export class DirectoryData {
       const department = params['department'] === 'all' ? undefined : params['department'];
       const firstChar = params['letter'] === 'all' ? undefined : params['letter'];
       const needle = params['needle'] ? params['needle'].toLocaleLowerCase() : undefined;
-      
+
       return this.alphabet
 
         // only the selected letter
@@ -57,7 +57,7 @@ export class DirectoryData {
 
               // filter by department
               if (department)
-                if(e.Industry.length === 0 || !e.Industry.find(i => i.Title === department)) return false;
+                if (e.Industry.length === 0 || !e.Industry.find(i => i.Title === department)) return false;
 
               // only the current letter
               return isNum ? ~~e.Title[0] : (e.Title[0].toLocaleLowerCase() === c);
@@ -71,12 +71,12 @@ export class DirectoryData {
     });
   }
 
-  
+
   private prepareForSearch(item: DirectoryItem): DirectoryItem {
-    const SearchText = (item.Title + " " 
-    + item.Town + " " 
+    const SearchText = (item.Title + ' '
+    + item.Town + ' '
     // + item.Industry.reduce<String>( (last: string, next: Industry) => last + " " + next.Title, "")).toLocaleLowerCase();
-    + item.Industry.map<String>(i => i.Title).join(" ")
+    + item.Industry.map<String>(i => i.Title).join(' ')
     ).toLocaleLowerCase();
     // console.log(search);
 
