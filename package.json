@@ -15,7 +15,7 @@
   },
   "private": true,
   "dependencies": {
-    "@2sic.com/dnn-sxc-angular": "^1.4.0",
+    "@2sic.com/dnn-sxc-angular": "^1.5.0",
     "@angular/common": "4.4.0-RC.0",
     "@angular/compiler": "^4.4.0-RC.0",
     "@angular/core": "^4.4.0-RC.0",

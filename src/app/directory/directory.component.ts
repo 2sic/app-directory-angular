@@ -6,8 +6,8 @@ import { Observable, Subject } from "rxjs";
 import { Industry } from "../entities/industry";
 import { debounce } from "rxjs/operator/debounce";
 import { i18n } from "app/entities/i18n";
-import { FilteredItems, GroupedItems } from "app/directory/filtered-items";
 import { FormControl } from "@angular/forms";
+import { GroupedItems } from "app/entities/grouped-items";
 
 @Component({
   selector: 'app-directory',
@@ -22,21 +22,18 @@ export class DirectoryComponent {
   industries$: Observable<Industry[]>;
   i18n$: Observable<i18n>;
   term = new FormControl(this.needle);
-
   // private searchSubject: Subject<string> = new Subject<string>();
 
   constructor(
     private data: DataService,
     private route: ActivatedRoute,
     private router: Router,
-    private filtered: FilteredItems,
     @Inject('alphabet') public alphabet: string[]
   ) {
-    this.i18n$ = data.i18n.share();
-    this.industries$ = data.industries;
-    this.groups$ = filtered.buildObservable(this.route);
+    this.industries$ = data.industries$;
+    this.i18n$ = data.i18n$.share();
+    this.groups$ = data.groupsFilteredByRoute$(this.route);
 
-    // todo: this doesn't look right yet
     // should work without a subject
     // this.searchSubject
     //   .debounceTime(400)
@@ -44,7 +41,7 @@ export class DirectoryComponent {
     //     this.router.navigate(['/search', needle]);
     //   });
 
-    // newer:
+    // solution without "own" subject
     this.term.valueChanges
       .debounceTime(400)
       .subscribe(newTerm => this.router.navigate(['/search', newTerm]));
@@ -54,7 +51,7 @@ export class DirectoryComponent {
       this.department = params['department'] || 'all';
       this.letter = params['letter'] || 'all';
       let tempNeedle = params['needle'];
-      if(tempNeedle) this.term.patchValue(tempNeedle);
+      this.term.patchValue(tempNeedle || "", { emitViewToModelChange: false, emitEvent: false });
     });
 
   }
@@ -67,6 +64,6 @@ export class DirectoryComponent {
   }
 
   // search() {
-  //   // this.searchSubject.next(this.needle);
+  //    this.searchSubject.next(this.needle);
   // }
 }

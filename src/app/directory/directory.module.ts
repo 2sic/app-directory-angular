@@ -7,7 +7,6 @@ import { SelectModule } from 'angular2-select';
 import { DirectoryComponent } from './directory.component';
 import { DataService } from 'app/directory/directory.service';
 import { Data } from '@2sic.com/dnn-sxc-angular';
-import { FilteredItems } from "app/directory/filtered-items";
 
 @NgModule({
   imports: [
@@ -25,7 +24,6 @@ import { FilteredItems } from "app/directory/filtered-items";
   ],
   providers: [
     DataService,
-    FilteredItems,
     Data,
     {
       provide: 'alphabet',
