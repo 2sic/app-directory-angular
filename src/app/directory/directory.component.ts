@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { DataService } from "app/directory/directory.service";
+import { DirectoryData } from "app/directory/directory-data.service";
 import { DirectoryItem } from "../entities/directory-item";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
@@ -25,7 +25,7 @@ export class DirectoryComponent {
   // private searchSubject: Subject<string> = new Subject<string>();
 
   constructor(
-    private data: DataService,
+    private data: DirectoryData,
     private route: ActivatedRoute,
     private router: Router,
     @Inject('alphabet') public alphabet: string[]

@@ -7,4 +7,5 @@ export class DirectoryItem {
     Link: string;
     Logo: string;
     Town: string;
+    SearchText: string;
 }

@@ -13,7 +13,7 @@ import { ActivatedRoute } from "@angular/router";
 import { GroupedItems } from "app/entities/grouped-items";
 
 @Injectable()
-export class DataService {
+export class DirectoryData {
   entries$: Observable<DirectoryItem[]>;
   industries$: Observable<Industry[]>;
   config$: Observable<Config>;
@@ -21,7 +21,6 @@ export class DataService {
   
   constructor(
     private data: Data,
-    // private filter: ItemFilter,
     @Inject('alphabet') private alphabet: string[]    
   ) {
     this.industries$ = data.content$<Industry>('Industry')
@@ -38,7 +37,7 @@ export class DataService {
 
   groupsFilteredByRoute$(route: ActivatedRoute): Observable<GroupedItems[]> {
     return Observable.combineLatest(
-      this.entries$,
+      this.entries$.map(all => all.map(this.prepareForSearch)),
       route.params
     ).map(([entries, params]) => {
       const department = params['department'] === 'all' ? undefined : params['department'];
@@ -54,19 +53,11 @@ export class DataService {
           t.push({
             label: c.toUpperCase(),
             entries: entries.filter((e: DirectoryItem) => {
-              if (needle
-
-                // not found in title
-                && e.Title.toLocaleLowerCase().search(needle) === -1
-
-                // has no town or not found in town
-                && (!e.Town || e.Town.toLocaleLowerCase().search(needle) === -1)
-
-                // has no departments or not found in department
-                && (e.Industry.length === 0 || e.Industry[0].Title.toLocaleLowerCase().search(needle) === -1)) return false;
+              if (needle && e.SearchText.search(needle) === -1) return false;
 
               // filter by department
-              if (department && (e.Industry.length === 0 || e.Industry[0].Title !== department)) return false;
+              if (department)
+                if(e.Industry.length === 0 || !e.Industry.find(i => i.Title === department)) return false;
 
               // only the current letter
               return isNum ? ~~e.Title[0] : (e.Title[0].toLocaleLowerCase() === c);
@@ -79,4 +70,16 @@ export class DataService {
         .filter(g => g.entries.length > 0);
     });
   }
+
+  
+  private prepareForSearch(item: DirectoryItem): DirectoryItem {
+    const SearchText = (item.Title + " " 
+    + item.Town + " " 
+    + item.Industry.reduce<String>( (last: string, next: Industry) => last + " " + next.Title, "")).toLocaleLowerCase();
+    // console.log(search);
+
+    return Object.assign({}, item, { SearchText });
+  }
+
+
 }

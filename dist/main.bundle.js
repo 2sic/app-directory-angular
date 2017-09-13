@@ -206,10 +206,101 @@ AppModule = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/directory/directory-data.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DirectoryData; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_entities_config__ = __webpack_require__("../../../../../src/app/entities/config.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+
+var DirectoryData = (function () {
+    function DirectoryData(data, alphabet) {
+        this.data = data;
+        this.alphabet = alphabet;
+        this.industries$ = data.content$('Industry')
+            .startWith(new Array());
+        this.entries$ = data.content$('DirectoryItem')
+            .startWith(new Array());
+        // config & i18n
+        var config$ = data.query$("Config");
+        this.config$ = config$.startWith(new __WEBPACK_IMPORTED_MODULE_4_app_entities_config__["a" /* Config */]());
+        this.i18n$ = this.config$.map(function (c) { return c.Resources[0]; });
+    }
+    DirectoryData.prototype.groupsFilteredByRoute$ = function (route) {
+        var _this = this;
+        return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].combineLatest(this.entries$.map(function (all) { return all.map(_this.prepareForSearch); }), route.params).map(function (_a) {
+            var entries = _a[0], params = _a[1];
+            var department = params['department'] === 'all' ? undefined : params['department'];
+            var firstChar = params['letter'] === 'all' ? undefined : params['letter'];
+            var needle = params['needle'] ? params['needle'].toLocaleLowerCase() : undefined;
+            return _this.alphabet
+                .filter(function (a) { return firstChar === undefined || a === firstChar; })
+                .reduce(function (t, c) {
+                var isNum = c === '1-10';
+                t.push({
+                    label: c.toUpperCase(),
+                    entries: entries.filter(function (e) {
+                        if (needle && e.SearchText.search(needle) === -1)
+                            return false;
+                        // filter by department
+                        if (department)
+                            if (e.Industry.length === 0 || !e.Industry.find(function (i) { return i.Title === department; }))
+                                return false;
+                        // only the current letter
+                        return isNum ? ~~e.Title[0] : (e.Title[0].toLocaleLowerCase() === c);
+                    }),
+                });
+                return t;
+            }, new Array())
+                .filter(function (g) { return g.entries.length > 0; });
+        });
+    };
+    DirectoryData.prototype.prepareForSearch = function (item) {
+        var SearchText = (item.Title + " "
+            + item.Town + " "
+            + item.Industry.reduce(function (last, next) { return last + " " + next.Title; }, "")).toLocaleLowerCase();
+        // console.log(search);
+        return Object.assign({}, item, { SearchText: SearchText });
+    };
+    return DirectoryData;
+}());
+DirectoryData = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])('alphabet')),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["b" /* Data */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["b" /* Data */]) === "function" && _a || Object, Array])
+], DirectoryData);
+
+var _a;
+//# sourceMappingURL=directory-data.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/directory/directory.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<main class=\"app-directory-wrapper\">\r\n    <div class=\"row\">\r\n        <div class=\"app-directory-search\">\r\n            <div class=\"col-xs-12 col-md-7\">\r\n                <h3>{{(i18n$ | async)?.SearchLabel}}</h3>\r\n                <span (click)=\"changeDepartment()\">X</span>\r\n                <input type=\"text\" id=\"app-directory-search\" placeholder=\"{{(i18n$ | async)?.SearchPlaceholder}}\" [formControl]=\"term\">\r\n                <!-- <input [(ngModel)]=\"needle\" (ngModelChange)=\"search()\" type=\"text\" id=\"app-directory-search\" placeholder=\"{{(i18n$|async)?.SearchPlaceholder}}\" [FormControl]=\"term\"> -->\r\n            </div>\r\n        </div>\r\n        <div class=\"app-directory-dropdown\">\r\n            <div class=\"col-xs-12 col-md-5\">\r\n                <h3>{{(i18n$|async)?.IndustryLabel}}</h3>\r\n                <select id=\"app-directory-dropdown\" [(ngModel)]=\"department\" (ngModelChange)=\"changeDepartment()\">\r\n                    <option value='all' selected>{{(i18n$ | async)?.IndustryAll}}</option>\r\n                    <option *ngFor=\"let d of industries$ | async\" [value]=\"d.Title\">{{d.Title}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-letterlist\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <ul>\r\n                    <li>\r\n                        <a [routerLink]=\"['/']\">{{(i18n$ | async)?.AZBarAll}}</a>\r\n                    </li>\r\n                    <li *ngFor=\"let letter of alphabet\">\r\n                        <a [routerLink]=\"['/list', department, letter]\">{{letter}}</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-section\">\r\n        <div *ngFor=\"let group of groups$ | async\" class=\"app-directory-group\">\r\n            <h3>{{group.label}}</h3>\r\n            <div class=\"row\">\r\n                <div *ngFor=\"let entry of group.entries\" class=\"col col-xs-6 col-md-3\" data-aos=\"fade-up\">\r\n                    <div class=\"app-directory-entry\">\r\n                        <img [src]=\"entry.Logo\" [alt]=\"entry.Title\">\r\n                        <div class=\"app-directory-entry-info-wrapper\">\r\n                            <a [href]=\"entry.Link\" target=\"_blank\">\r\n                                <span class=\"app-directory-entry-infos\">\r\n                                    <strong>{{entry.Title}}</strong>\r\n                                    <span>{{entry.Industry[0].Title}}</span>\r\n                                    <span>{{entry.LinkText}}</span>\r\n                                </span>\r\n                            </a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>"
+module.exports = "<main class=\"app-directory-wrapper\">\r\n    <div class=\"row\">\r\n        <div class=\"app-directory-search\">\r\n            <div class=\"col-xs-12 col-md-7\">\r\n                <h3>{{(i18n$ | async)?.SearchLabel}}</h3>\r\n                <span (click)=\"changeDepartment()\">X</span>\r\n                <input type=\"text\" id=\"app-directory-search\" placeholder=\"{{(i18n$ | async)?.SearchPlaceholder}}\" [formControl]=\"term\">\r\n                <!-- <input [(ngModel)]=\"needle\" (ngModelChange)=\"search()\" type=\"text\" id=\"app-directory-search\" placeholder=\"{{(i18n$|async)?.SearchPlaceholder}}\" [FormControl]=\"term\"> -->\r\n            </div>\r\n        </div>\r\n        <div class=\"app-directory-dropdown\">\r\n            <div class=\"col-xs-12 col-md-5\">\r\n                <h3>{{(i18n$|async)?.IndustryLabel}}</h3>\r\n                <select id=\"app-directory-dropdown\" [(ngModel)]=\"department\" (ngModelChange)=\"changeDepartment()\">\r\n                    <option value='all' selected>{{(i18n$ | async)?.IndustryAll}}</option>\r\n                    <option *ngFor=\"let d of industries$ | async\" [value]=\"d.Title\">{{d.Title}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-letterlist\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <ul>\r\n                    <li>\r\n                        <a [routerLink]=\"['/']\">{{(i18n$ | async)?.AZBarAll}}</a>\r\n                    </li>\r\n                    <li *ngFor=\"let letter of alphabet\">\r\n                        <a [routerLink]=\"['/list', department, letter]\">{{letter}}</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"app-directory-section\">\r\n        <div *ngFor=\"let group of groups$ | async\" class=\"app-directory-group\">\r\n            <h3>{{group.label}}</h3>\r\n            <div class=\"row\">\r\n                <div *ngFor=\"let entry of group.entries\" class=\"col col-xs-6 col-md-3\" data-aos=\"fade-up\">\r\n                    <div class=\"app-directory-entry\">\r\n                        <img [src]=\"entry.Logo\" [alt]=\"entry.Title\">\r\n                        <div class=\"app-directory-entry-info-wrapper\">\r\n                            <a [href]=\"entry.Link\" target=\"_blank\">\r\n                                <span class=\"app-directory-entry-infos\">\r\n                                    <strong>{{entry.Title}}</strong>\r\n                                    <span>{{entry.Industry[0]?.Title}}</span>\r\n                                    <span>{{entry.LinkText}}</span>\r\n                                </span>\r\n                            </a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>"
 
 /***/ }),
 
@@ -237,7 +328,7 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DirectoryComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_service__ = __webpack_require__("../../../../../src/app/directory/directory.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_data_service__ = __webpack_require__("../../../../../src/app/directory/directory-data.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -303,7 +394,7 @@ DirectoryComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/directory/directory.component.scss")]
     }),
     __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])('alphabet')),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_service__["a" /* DataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_service__["a" /* DataService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _c || Object, Array])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_data_service__["a" /* DirectoryData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_data_service__["a" /* DirectoryData */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _c || Object, Array])
 ], DirectoryComponent);
 
 var _a, _b, _c;
@@ -323,7 +414,7 @@ var _a, _b, _c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_select__ = __webpack_require__("../../../../angular2-select/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angular2_select__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directory_component__ = __webpack_require__("../../../../../src/app/directory/directory.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_directory_directory_service__ = __webpack_require__("../../../../../src/app/directory/directory.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_directory_directory_data_service__ = __webpack_require__("../../../../../src/app/directory/directory-data.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/index.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -360,7 +451,7 @@ DirectoryModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_5__directory_component__["a" /* DirectoryComponent */],
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_6_app_directory_directory_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_6_app_directory_directory_data_service__["a" /* DirectoryData */],
             __WEBPACK_IMPORTED_MODULE_7__2sic_com_dnn_sxc_angular__["b" /* Data */],
             {
                 provide: 'alphabet',
@@ -402,94 +493,6 @@ DirectoryModule = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/directory/directory.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/index.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_entities_config__ = __webpack_require__("../../../../../src/app/entities/config.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-
-
-
-
-
-var DataService = (function () {
-    function DataService(data, 
-        // private filter: ItemFilter,
-        alphabet) {
-        this.data = data;
-        this.alphabet = alphabet;
-        this.industries$ = data.content$('Industry')
-            .startWith(new Array());
-        this.entries$ = data.content$('DirectoryItem')
-            .startWith(new Array());
-        // config & i18n
-        var config$ = data.query$("Config");
-        this.config$ = config$.startWith(new __WEBPACK_IMPORTED_MODULE_4_app_entities_config__["a" /* Config */]());
-        this.i18n$ = this.config$.map(function (c) { return c.Resources[0]; });
-    }
-    DataService.prototype.groupsFilteredByRoute$ = function (route) {
-        var _this = this;
-        return __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].combineLatest(this.entries$, route.params).map(function (_a) {
-            var entries = _a[0], params = _a[1];
-            var department = params['department'] === 'all' ? undefined : params['department'];
-            var firstChar = params['letter'] === 'all' ? undefined : params['letter'];
-            var needle = params['needle'] ? params['needle'].toLocaleLowerCase() : undefined;
-            return _this.alphabet
-                .filter(function (a) { return firstChar === undefined || a === firstChar; })
-                .reduce(function (t, c) {
-                var isNum = c === '1-10';
-                t.push({
-                    label: c.toUpperCase(),
-                    entries: entries.filter(function (e) {
-                        if (needle
-                            && e.Title.toLocaleLowerCase().search(needle) === -1
-                            && (!e.Town || e.Town.toLocaleLowerCase().search(needle) === -1)
-                            && (e.Industry.length === 0 || e.Industry[0].Title.toLocaleLowerCase().search(needle) === -1))
-                            return false;
-                        // filter by department
-                        if (department && (e.Industry.length === 0 || e.Industry[0].Title !== department))
-                            return false;
-                        // only the current letter
-                        return isNum ? ~~e.Title[0] : (e.Title[0].toLocaleLowerCase() === c);
-                    }),
-                });
-                return t;
-            }, new Array())
-                .filter(function (g) { return g.entries.length > 0; });
-        });
-    };
-    return DataService;
-}());
-DataService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])('alphabet')),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["b" /* Data */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["b" /* Data */]) === "function" && _a || Object, Array])
-], DataService);
-
-var _a;
-//# sourceMappingURL=directory.service.js.map
-
-/***/ }),
-
 /***/ "../../../../../src/app/entities/config.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -513,6 +516,9 @@ var Config = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return i18n; });
+/**
+ * language resources for our component
+ */
 var i18n = (function () {
     function i18n() {
         this.Title = "loading...";

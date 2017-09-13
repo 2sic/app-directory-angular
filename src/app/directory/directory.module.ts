@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { SelectModule } from 'angular2-select';
  
 import { DirectoryComponent } from './directory.component';
-import { DataService } from 'app/directory/directory.service';
+import { DirectoryData } from 'app/directory/directory-data.service';
 import { Data } from '@2sic.com/dnn-sxc-angular';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { Data } from '@2sic.com/dnn-sxc-angular';
     DirectoryComponent,
   ],
   providers: [
-    DataService,
+    DirectoryData,
     Data,
     {
       provide: 'alphabet',

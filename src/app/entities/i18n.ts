@@ -1,4 +1,7 @@
 
+/**
+ * language resources for our component
+ */
 export class i18n {
     Title: string = "loading...";
     SearchLabel: string = "...";
