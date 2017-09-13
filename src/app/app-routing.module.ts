@@ -9,13 +9,12 @@ const appRoutes: Routes = [
     component: DirectoryComponent
   },
   {
-    path: '',
-    redirectTo: 'list/all/all',
-    pathMatch: 'full'
-  },
-  {
     path: 'search/:needle',
     component: DirectoryComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'list/all/all',
   },
 ];
 
@@ -23,7 +22,6 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes
-      // { enableTracing: true } // <-- debugging purposes only
     )
   ],
   providers: [
