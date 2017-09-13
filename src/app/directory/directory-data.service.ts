@@ -75,7 +75,9 @@ export class DirectoryData {
   private prepareForSearch(item: DirectoryItem): DirectoryItem {
     const SearchText = (item.Title + " " 
     + item.Town + " " 
-    + item.Industry.reduce<String>( (last: string, next: Industry) => last + " " + next.Title, "")).toLocaleLowerCase();
+    // + item.Industry.reduce<String>( (last: string, next: Industry) => last + " " + next.Title, "")).toLocaleLowerCase();
+    + item.Industry.map<String>(i => i.Title).join(" ")
+    ).toLocaleLowerCase();
     // console.log(search);
 
     return Object.assign({}, item, { SearchText });

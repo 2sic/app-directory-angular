@@ -201,6 +201,9 @@
         span{
             display: block;
             color: $color-light;
+            span{
+                display: inline
+            }
         }
     }
 

@@ -32,7 +32,7 @@ export class DirectoryComponent {
     private data: DirectoryData,
     private route: ActivatedRoute,
     private router: Router,
-    @Inject('alphabet') public alphabet: string[]
+    @Inject('alphabet') private alphabet: string[]
   ) {
     this.industries$ = data.industries$;
     this.i18n$ = data.i18n$.share();
