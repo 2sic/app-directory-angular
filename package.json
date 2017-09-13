@@ -1,6 +1,6 @@
 {
   "name": "app-directory",
-  "version": "04.04.01",
+  "version": "4.4.2",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -15,7 +15,7 @@
   },
   "private": true,
   "dependencies": {
-    "@2sic.com/dnn-sxc-angular": "git+https://github.com/2sic/dnn-sxc-angular.git",
+    "@2sic.com/dnn-sxc-angular": "^1.4.0",
     "@angular/common": "4.4.0-RC.0",
     "@angular/compiler": "^4.4.0-RC.0",
     "@angular/core": "^4.4.0-RC.0",

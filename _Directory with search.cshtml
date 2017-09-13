@@ -1,8 +1,9 @@
 
 @{
-  var randomxyz = "this-should-never-exist-in-the-url";
-  var basePath = Link.To(parameters: randomxyz + "=1");
-  basePath = basePath.Substring(0, basePath.IndexOf(randomxyz));
+	// helper to generate a base path which is also valid on home (special DNN behaviour)
+	var randomxyz = "this-should-never-exist-in-the-url";
+	var basePath = Link.To(parameters: randomxyz + "=1");
+	basePath = basePath.Substring(0, basePath.IndexOf(randomxyz));
 }
 
 <base href="@basePath">
@@ -16,16 +17,3 @@
 <script type="text/javascript" src="@App.Path/dist/polyfills.bundle.js"></script>
 <script type="text/javascript" src="@App.Path/dist/vendor.bundle.js"></script>
 <script type="text/javascript" src="@App.Path/dist/main.bundle.js"></script>
-
-<!-- Prevent Form Submit -->
-<!-- todo: not a good solution! -->
-<script>
-	(function() {
-		var firstForm = document.querySelectorAll("form")[0];
-		if (!firstForm) return false;
-		firstForm.addEventListener('submit', function(e) {
-			e.preventDefault();
-		});
-	})();
-</script>
-
