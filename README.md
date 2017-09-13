@@ -1,28 +1,23 @@
-# AppDirectory
+# DNN / 2sxc Directory App using Angular 4
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
+This is a fully functional angular app for DNN & 2sxc.
 
-## Development server
+You can use it as is, modify it as you want or simply use it as inspiration, when learning Angular on DNN. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
+The app requires additional data, which is created when you install it in 2sxc. So to get started, you should
 
-## Code scaffolding
+1. have DNN with 2sxc installed
+1. install this app from the releases or the [app-catalog](https://2sxc.org/en/apps) (this will create a running, working app with data)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+## Discover How It's Built
 
-## Build
+todo...
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+## Modify As You Want
+The full source code is included, so you can simply work with angular as you wish. We recommend using VS Code. Either way, you will usually...
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. run `npm install` from the main app folder to get all dependencies
+1. run `npm watch` to continously build the solution while you change code
+1. run `npm watchprod` to continously build the solution in production (AOT) code (smaller, etc.)

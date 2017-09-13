@@ -1,6 +1,6 @@
 {
   "name": "app-directory",
-  "version": "0.0.0",
+  "version": "04.04.01",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "watch": "ng build --watch --output-hashing=none",
-    "watchaot": "ng build --watch --prod --aot --output-hashing=none",
+    "watchprod": "ng build --watch --prod --output-hashing=none",
     "copy:2dm": "cpx \"{,!(node_modules)/**/}*.*\" \"//srv-devweb-01/Projects/2sxc Apps Dev/Web/Portals/directory-angular4/2sxc/Directory\" -w -v"
   },
   "private": true,

@@ -18,13 +18,13 @@ export class DataService {
   i18n: Observable<i18n>;
   
   constructor(
-    private sxcData: Data
+    private data: Data
   ) {
-    this.industries = this.sxcData.content<Industry>('Industry').get()
+    this.industries = data.content$<Industry>('Industry')
       .startWith(new Array<Industry>());
-    this.entries =  this.sxcData.content<DirectoryItem>('DirectoryItem').get()
+    this.entries =  data.content$<DirectoryItem>('DirectoryItem')
       .startWith(new Array<DirectoryItem>());
-    const config$ = this.sxcData.query<Config>("Config").get();
+    const config$ = data.query$<Config>("Config");
     this.config = config$.startWith(new Config());
     this.i18n = this.config.map(c => c.Resources[0]);
   }
