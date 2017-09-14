@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="09.05.01" ExportDate="2017-09-14T15:48:53.4179818+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="09.05.01" ExportDate="2017-09-14T15:52:54.9494662+02:00">
   <Header>
     <App Guid="cd194e49-2a1a-424c-9ac4-f5b797d9e89d" />
     <Language Default="en-US" />
@@ -81,7 +81,7 @@
             <Value Key="InputType" Value="string-default" Type="String">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
-            <Value Key="Name" Value="Titel" Type="String">
+            <Value Key="Name" Value="Title" Type="String">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
             <Value Key="Notes" Value="" Type="String">
@@ -116,15 +116,15 @@
             <Value Key="ValidationRegExJavaScript" Value="" Type="String">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
-            <Value Key="WysiwygHeight" Value="" Type="Number">
+            <Value Key="WysiwygHeight" Value="0" Type="Number">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
-            <Value Key="WysiwygWidth" Value="" Type="Number">
+            <Value Key="WysiwygWidth" Value="0" Type="Number">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
           </Entity>
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="f3c74141-dc59-4a92-aa29-11144093def5" KeyNumber="1674">
-            <Value Key="RowCount" Value="" Type="Number">
+            <Value Key="RowCount" Value="0" Type="Number">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
           </Entity>
@@ -144,6 +144,9 @@
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
             <Value Key="Name" Value="Branche" Type="String">
+              <Dimension DimensionID="70" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Industry" Type="String">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
             <Value Key="Notes" Value="" Type="String">
@@ -273,10 +276,16 @@
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
             <Value Key="Name" Value="Link Text" Type="String">
+              <Dimension DimensionID="70" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Link Text" Type="String">
+              <Dimension DimensionID="69" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
             <Value Key="Notes" Value="&lt;p&gt;Geben Sie hier den Text ein, der anstelle der URL angezeigt werden soll.&lt;/p&gt;" Type="String">
-              <Dimension DimensionID="69" ReadOnly="false" />
+              <Dimension DimensionID="70" ReadOnly="false" />
             </Value>
             <Value Key="Required" Value="False" Type="Boolean">
               <Dimension DimensionID="69" ReadOnly="false" />
@@ -307,15 +316,15 @@
             <Value Key="ValidationRegExJavaScript" Value="" Type="String">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
-            <Value Key="WysiwygHeight" Value="" Type="Number">
+            <Value Key="WysiwygHeight" Value="0" Type="Number">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
-            <Value Key="WysiwygWidth" Value="" Type="Number">
+            <Value Key="WysiwygWidth" Value="0" Type="Number">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
           </Entity>
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="a05a08a1-79d3-49e1-86e3-c0143cc739f8" KeyNumber="1678">
-            <Value Key="RowCount" Value="" Type="Number">
+            <Value Key="RowCount" Value="0" Type="Number">
               <Dimension DimensionID="69" ReadOnly="false" />
             </Value>
           </Entity>
@@ -536,7 +545,7 @@
       <Value Key="SupportsAjaxReload" Value="False" Type="Boolean">
         <Dimension DimensionID="69" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="02.00.03" Type="String">
+      <Value Key="Version" Value="02.00.04" Type="String">
         <Dimension DimensionID="69" ReadOnly="false" />
       </Value>
     </Entity>
