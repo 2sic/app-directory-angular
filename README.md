@@ -1,4 +1,5 @@
 <img src="app-icon.png" width="200px" align="right">
+
 # DNN / 2sxc Directory App using Angular 4
 
 This is a fully functional angular app for DNN & 2sxc.
