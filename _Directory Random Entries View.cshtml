@@ -1,9 +1,5 @@
 <link rel="stylesheet" href="@App.Path/dist/styles.css" data-enableoptimizations="true" />
 
-@{
-    var rndEntries = AsDynamic(App.Data["DirectoryItem"]).OrderBy(r => Guid.NewGuid()).Take(8);
-}
-
 <main class="app-directory-wrapper">
     @Edit.Toolbar(toolbar: new object[] { 
 	    new { 
@@ -23,7 +19,7 @@
      <div class="app-directory-section">
          <div class="app-directory-group sc-element">
               <div class="row">
-                @foreach(var entry in rndEntries){    
+                @foreach(var entry in AsDynamic(Data["Default"]).Take(8)) {    
                 <div class="col col-xs-6 col-sm-4 col-lg-3" data-aos="fade-right">
                     @Edit.Toolbar(entry)
                     <div class="app-directory-entry">
@@ -32,7 +28,7 @@
                             <a href="@entry.Link" target="_blank">
                                 <span class="app-directory-entry-infos">
                                     <strong>@entry.Title</strong>
-                                    <span>@entry.Industry[0].Title</span>
+                                    <span>@String.Join(", ", (entry.Industry as IEnumerable<dynamic>).Select(i => AsDynamic(i).Title).ToArray())</span>
                                     <span>@entry.LinkText</span>
                                 </span>
                             </a>
