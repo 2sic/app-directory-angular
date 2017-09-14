@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { DirectoryModule } from 'app/directory/directory.module';
 import { AppComponent } from './app.component';
-import { HttpHandler } from '@angular/common/http';
 import { DnnSxcModule } from '@2sic.com/dnn-sxc-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'app/app-routing.module';

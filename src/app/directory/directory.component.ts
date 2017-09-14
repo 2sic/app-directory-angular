@@ -46,6 +46,10 @@ export class DirectoryComponent {
         Active: grp.find(g => g.label.toLocaleLowerCase() === letr)
       } )));
 
+    // stream of text input in search
+    this.term.valueChanges
+      .debounceTime(400)
+      .subscribe(newTerm => this.router.navigate(['/search', newTerm]));
 
     // should work without a subject
     // this.searchSubject
@@ -54,10 +58,6 @@ export class DirectoryComponent {
     //     this.router.navigate(['/search', needle]);
     //   });
 
-    // solution without "own" subject
-    this.term.valueChanges
-      .debounceTime(400)
-      .subscribe(newTerm => this.router.navigate(['/search', newTerm]));
 
     // keep fields updated from url
     this.route.params.subscribe(params => {
