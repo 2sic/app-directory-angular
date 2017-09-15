@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { RouteReuseProvider } from 'app/route-reuse-strategy';
 
+import { BetaEdit } from '@2sic.com/dnn-sxc-angular';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RouteReuseProvider } from 'app/route-reuse-strategy';
     AppRoutingModule  // always have this as the very last import! - https://angular.io/guide/router#module-import-order-matters
   ],
   providers: [
-    RouteReuseProvider
+    RouteReuseProvider,
+    BetaEdit
   ],
   bootstrap: [AppComponent]
 })

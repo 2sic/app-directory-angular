@@ -7,6 +7,7 @@ import { SelectModule } from 'angular2-select';
 import { DirectoryComponent } from './directory.component';
 import { DirectoryData } from 'app/directory/directory-data.service';
 import { Data } from '@2sic.com/dnn-sxc-angular';
+import { SxcToolbarDirective } from 'app/directory/sxc-toolbar-test';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { Data } from '@2sic.com/dnn-sxc-angular';
   ],
   declarations: [
     DirectoryComponent,
+    SxcToolbarDirective
   ],
   providers: [
     DirectoryData,

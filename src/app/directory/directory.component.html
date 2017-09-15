@@ -1,11 +1,18 @@
+<div>
+    tests
+    <span [innerHtml]="edit.toolbarMaker()"></span>
+    {{edit.toolbarMaker()}}
+    <sxc-toolbar></sxc-toolbar>
+    endtest
+</div>
 <main class="app-directory-wrapper">
+    <!-- search / filter area -->
     <div class="row">
         <div class="app-directory-search">
             <div class="col-xs-12 col-md-7">
                 <h3>{{(i18n$ | async)?.SearchLabel}}</h3>
                 <span (click)="changeDepartment()">X</span>
                 <input type="text" id="app-directory-search" placeholder="{{(i18n$ | async)?.SearchPlaceholder}}" [formControl]="term">
-                <!-- <input [(ngModel)]="needle" (ngModelChange)="search()" type="text" id="app-directory-search" placeholder="{{(i18n$|async)?.SearchPlaceholder}}" [FormControl]="term"> -->
             </div>
         </div>
         <div class="app-directory-dropdown">
@@ -18,6 +25,8 @@
             </div>
         </div>
     </div>
+
+    <!-- A-Z bar -->
     <div class="app-directory-letterlist">
         <div class="row">
             <div class="col-xs-12">
@@ -33,12 +42,15 @@
             </div>
         </div>
     </div>
+
+    <!-- results -->
     <div class="app-directory-section">
         <div *ngFor="let group of groups$ | async" class="app-directory-group">
             <h3>{{group.label}}</h3>
             <div class="row">
                 <div *ngFor="let entry of group.entries" class="col col-xs-6 col-md-3" data-aos="fade-up">
-                    <div class="app-directory-entry">
+                    <div class="app-directory-entry sc-element">
+                        <sxc-toolbar [toolbar]="{entityId: entry.Id}"></sxc-toolbar>
                         <img [src]="entry.Logo" [alt]="entry.Title">
                         <div class="app-directory-entry-info-wrapper">
                             <a [href]="entry.Link" target="_blank">

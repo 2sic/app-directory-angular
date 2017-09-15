@@ -10,6 +10,8 @@ import { GroupedItems } from 'app/entities/grouped-items';
 import { AZLetter } from 'app/entities/az-letter';
 import { Observable } from 'rxjs/Observable';
 
+import { BetaEdit } from '@2sic.com/dnn-sxc-angular';
+
 @Component({
   selector: 'app-directory',
   templateUrl: './directory.component.html',
@@ -19,23 +21,21 @@ export class DirectoryComponent {
   groups$: Observable<GroupedItems[]>;
   department: string;
   letter: string;
-  needle: string;
+  // needle: string;
   industries$: Observable<Industry[]>;
   i18n$: Observable<I18n>;
-  term = new FormControl(this.needle);
+  term = new FormControl(/* this.needle */);
   azList: Observable<AZLetter[]>;
-  // private searchSubject: Subject<string> = new Subject<string>();
-
-
 
   constructor(
     private data: DirectoryData,
     private route: ActivatedRoute,
     private router: Router,
+    public edit: BetaEdit,
     @Inject('alphabet') private alphabet: string[]
   ) {
     this.industries$ = data.industries$;
-    this.i18n$ = data.i18n$.share();
+    this.i18n$ = data.i18n$;
     this.groups$ = data.groupsFilteredByRoute$(this.route).share();
 
     this.azList = this.groups$
@@ -51,14 +51,6 @@ export class DirectoryComponent {
       .debounceTime(400)
       .subscribe(newTerm => this.router.navigate(['/search', newTerm]));
 
-    // should work without a subject
-    // this.searchSubject
-    //   .debounceTime(400)
-    //   .subscribe(needle => {
-    //     this.router.navigate(['/search', needle]);
-    //   });
-
-
     // keep fields updated from url
     this.route.params.subscribe(params => {
       this.department = params['department'] || 'all';
@@ -70,13 +62,10 @@ export class DirectoryComponent {
   }
 
   changeDepartment() {
-    this.needle = undefined;
+    // this.needle = undefined;
     if (!this.department) this.department = 'all';
     if (!this.letter) this.letter = 'all';
     this.router.navigate(['/list', this.department, this.letter]);
   }
 
-  // search() {
-  //    this.searchSubject.next(this.needle);
-  // }
 }
