@@ -6,8 +6,7 @@ import { SelectModule } from 'angular2-select';
  
 import { DirectoryComponent } from './directory.component';
 import { DirectoryData } from 'app/directory/directory-data.service';
-import { Data } from '@2sic.com/dnn-sxc-angular';
-import { SxcToolbarDirective } from 'app/directory/sxc-toolbar-test';
+import { Data, ContentManagerModule, SxcToolbarDirective } from '@2sic.com/dnn-sxc-angular';
 
 @NgModule({
   imports: [
@@ -15,7 +14,8 @@ import { SxcToolbarDirective } from 'app/directory/sxc-toolbar-test';
     RouterModule,
     FormsModule,
     SelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // ContentManagerModule
   ],
   exports: [
     DirectoryComponent

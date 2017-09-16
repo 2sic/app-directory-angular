@@ -10,7 +10,6 @@ import { GroupedItems } from 'app/entities/grouped-items';
 import { AZLetter } from 'app/entities/az-letter';
 import { Observable } from 'rxjs/Observable';
 
-import { BetaEdit } from '@2sic.com/dnn-sxc-angular';
 
 @Component({
   selector: 'app-directory',
@@ -31,7 +30,7 @@ export class DirectoryComponent {
     private data: DirectoryData,
     private route: ActivatedRoute,
     private router: Router,
-    public edit: BetaEdit,
+    //public edit: BetaEdit,
     @Inject('alphabet') private alphabet: string[]
   ) {
     this.industries$ = data.industries$;

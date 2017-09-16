@@ -132,14 +132,14 @@ var AppComponent = (function (_super) {
         return _super.call(this, element, context) || this;
     }
     return AppComponent;
-}(__WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__["d" /* DnnAppComponent */]));
+}(__WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__["c" /* DnnAppComponent */]));
 AppComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
         template: __webpack_require__("../../../../../src/app/app.component.html"),
         styles: [__webpack_require__("../../../../../src/app/app.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__["b" /* Context */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__["b" /* Context */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__["a" /* Context */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__["a" /* Context */]) === "function" && _b || Object])
 ], AppComponent);
 
 var _a, _b;
@@ -174,7 +174,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 var AppModule = (function () {
     function AppModule() {
     }
@@ -186,15 +185,14 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_4__2sic_com_dnn_sxc_angular__["e" /* DnnSxcModule */],
+            __WEBPACK_IMPORTED_MODULE_4__2sic_com_dnn_sxc_angular__["d" /* DnnSxcModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["c" /* HttpClientModule */],
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2_app_directory_directory_module__["a" /* DirectoryModule */],
             __WEBPACK_IMPORTED_MODULE_6_app_app_routing_module__["a" /* AppRoutingModule */] // always have this as the very last import! - https://angular.io/guide/router#module-import-order-matters
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_7_app_route_reuse_strategy__["a" /* RouteReuseProvider */],
-            __WEBPACK_IMPORTED_MODULE_4__2sic_com_dnn_sxc_angular__["a" /* BetaEdit */]
+            __WEBPACK_IMPORTED_MODULE_7_app_route_reuse_strategy__["a" /* RouteReuseProvider */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
     })
@@ -286,7 +284,7 @@ var DirectoryData = (function () {
 DirectoryData = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])('alphabet')),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["c" /* Data */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["c" /* Data */]) === "function" && _a || Object, Array])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["b" /* Data */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__2sic_com_dnn_sxc_angular__["b" /* Data */]) === "function" && _a || Object, Array])
 ], DirectoryData);
 
 var _a;
@@ -297,7 +295,7 @@ var _a;
 /***/ "../../../../../src/app/directory/directory.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    tests\r\n    <span [innerHtml]=\"edit.toolbarMaker()\"></span>\r\n    {{edit.toolbarMaker()}}\r\n    <sxc-toolbar></sxc-toolbar>\r\n    endtest\r\n</div>\r\n<main class=\"app-directory-wrapper\">\r\n    <!-- search / filter area -->\r\n    <div class=\"row\">\r\n        <div class=\"app-directory-search\">\r\n            <div class=\"col-xs-12 col-md-7\">\r\n                <h3>{{(i18n$ | async)?.SearchLabel}}</h3>\r\n                <span (click)=\"changeDepartment()\">X</span>\r\n                <input type=\"text\" id=\"app-directory-search\" placeholder=\"{{(i18n$ | async)?.SearchPlaceholder}}\" [formControl]=\"term\">\r\n            </div>\r\n        </div>\r\n        <div class=\"app-directory-dropdown\">\r\n            <div class=\"col-xs-12 col-md-5\">\r\n                <h3>{{(i18n$|async)?.IndustryLabel}}</h3>\r\n                <select id=\"app-directory-dropdown\" [(ngModel)]=\"department\" (ngModelChange)=\"changeDepartment()\">\r\n                    <option value='all' selected>{{(i18n$ | async)?.IndustryAll}}</option>\r\n                    <option *ngFor=\"let d of industries$ | async\" [value]=\"d.Title\">{{d.Title}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- A-Z bar -->\r\n    <div class=\"app-directory-letterlist\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <ul>\r\n                    <li>\r\n                        <a [routerLink]=\"['/']\">{{(i18n$ | async)?.AZBarAll}}</a>\r\n                    </li>\r\n                    <li *ngFor=\"let az of azList | async\">\r\n                        <a *ngIf=\"az.Active\" [routerLink]=\"['/list', department, az.Letter]\">{{az.Letter}}</a>\r\n                        <a *ngIf=\"!az.Active\" href=\"#\" class=\"disabled\">{{az.Letter}}</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- results -->\r\n    <div class=\"app-directory-section\">\r\n        <div *ngFor=\"let group of groups$ | async\" class=\"app-directory-group\">\r\n            <h3>{{group.label}}</h3>\r\n            <div class=\"row\">\r\n                <div *ngFor=\"let entry of group.entries\" class=\"col col-xs-6 col-md-3\" data-aos=\"fade-up\">\r\n                    <div class=\"app-directory-entry sc-element\">\r\n                        <sxc-toolbar [config]=\"{entityId: entry.Id}\" hello=\"whatever\"></sxc-toolbar>\r\n                        <img [src]=\"entry.Logo\" [alt]=\"entry.Title\">\r\n                        <div class=\"app-directory-entry-info-wrapper\">\r\n                            <a [href]=\"entry.Link\" target=\"_blank\">\r\n                                <span class=\"app-directory-entry-infos\">\r\n                                    <strong>{{entry.Title}}</strong>\r\n                                    <span>\r\n                                        <span *ngFor=\"let i of entry.Industry\">{{i.Title}} </span>\r\n                                    </span>\r\n                                    <span>{{entry.LinkText}}</span>\r\n                                </span>\r\n                            </a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>"
+module.exports = "<main class=\"app-directory-wrapper\">\r\n    <!-- search / filter area -->\r\n    <div class=\"row\">\r\n        <div class=\"app-directory-search\">\r\n            <div class=\"col-xs-12 col-md-7\">\r\n                <h3>{{(i18n$ | async)?.SearchLabel}}</h3>\r\n                <span (click)=\"changeDepartment()\">X</span>\r\n                <input type=\"text\" id=\"app-directory-search\" placeholder=\"{{(i18n$ | async)?.SearchPlaceholder}}\" [formControl]=\"term\">\r\n            </div>\r\n        </div>\r\n        <div class=\"app-directory-dropdown\">\r\n            <div class=\"col-xs-12 col-md-5\">\r\n                <h3>{{(i18n$|async)?.IndustryLabel}}</h3>\r\n                <select id=\"app-directory-dropdown\" [(ngModel)]=\"department\" (ngModelChange)=\"changeDepartment()\">\r\n                    <option value='all' selected>{{(i18n$ | async)?.IndustryAll}}</option>\r\n                    <option *ngFor=\"let d of industries$ | async\" [value]=\"d.Title\">{{d.Title}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- A-Z bar -->\r\n    <div class=\"app-directory-letterlist\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12\">\r\n                <ul>\r\n                    <li>\r\n                        <a [routerLink]=\"['/']\">{{(i18n$ | async)?.AZBarAll}}</a>\r\n                    </li>\r\n                    <li *ngFor=\"let az of azList | async\">\r\n                        <a *ngIf=\"az.Active\" [routerLink]=\"['/list', department, az.Letter]\">{{az.Letter}}</a>\r\n                        <a *ngIf=\"!az.Active\" href=\"#\" class=\"disabled\">{{az.Letter}}</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- results -->\r\n    <div class=\"app-directory-section\">\r\n        <div *ngFor=\"let group of groups$ | async\" class=\"app-directory-group\">\r\n            <h3>{{group.label}}</h3>\r\n            <div class=\"row\">\r\n                <div *ngFor=\"let entry of group.entries\" class=\"col col-xs-6 col-md-3\" data-aos=\"fade-up\">\r\n                    <div class=\"app-directory-entry sc-element\">\r\n                        <sxc-toolbar [toolbar]=\"{entityId: entry.Id}\"></sxc-toolbar>\r\n                        <img [src]=\"entry.Logo\" [alt]=\"entry.Title\">\r\n                        <div class=\"app-directory-entry-info-wrapper\">\r\n                            <a [href]=\"entry.Link\" target=\"_blank\">\r\n                                <span class=\"app-directory-entry-infos\">\r\n                                    <strong>{{entry.Title}}</strong>\r\n                                    <span>\r\n                                        <span *ngFor=\"let i of entry.Industry\">{{i.Title}} </span>\r\n                                    </span>\r\n                                    <span>{{entry.LinkText}}</span>\r\n                                </span>\r\n                            </a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>"
 
 /***/ }),
 
@@ -329,7 +327,6 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_entities_az_letter__ = __webpack_require__("../../../../../src/app/entities/az-letter.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/index.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -347,14 +344,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
-
 var DirectoryComponent = (function () {
-    function DirectoryComponent(data, route, router, edit, alphabet) {
+    function DirectoryComponent(data, route, router, 
+        //public edit: BetaEdit,
+        alphabet) {
         var _this = this;
         this.data = data;
         this.route = route;
         this.router = router;
-        this.edit = edit;
         this.alphabet = alphabet;
         this.term = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"]();
         this.industries$ = data.industries$;
@@ -395,11 +392,11 @@ DirectoryComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/directory/directory.component.html"),
         styles: [__webpack_require__("../../../../../src/app/directory/directory.component.scss")]
     }),
-    __param(4, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])('alphabet')),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_data_service__["a" /* DirectoryData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_data_service__["a" /* DirectoryData */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__2sic_com_dnn_sxc_angular__["a" /* BetaEdit */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__2sic_com_dnn_sxc_angular__["a" /* BetaEdit */]) === "function" && _d || Object, Array])
+    __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])('alphabet')),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_data_service__["a" /* DirectoryData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_directory_directory_data_service__["a" /* DirectoryData */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _c || Object, Array])
 ], DirectoryComponent);
 
-var _a, _b, _c, _d;
+var _a, _b, _c;
 //# sourceMappingURL=directory.component.js.map
 
 /***/ }),
@@ -418,14 +415,12 @@ var _a, _b, _c, _d;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directory_component__ = __webpack_require__("../../../../../src/app/directory/directory.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_directory_directory_data_service__ = __webpack_require__("../../../../../src/app/directory/directory-data.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/index.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_app_directory_sxc_toolbar_test__ = __webpack_require__("../../../../../src/app/directory/sxc-toolbar-test.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -446,18 +441,18 @@ DirectoryModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3__angular_router__["d" /* RouterModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormsModule"],
             __WEBPACK_IMPORTED_MODULE_4_angular2_select__["SelectModule"],
-            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["ReactiveFormsModule"]
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["ReactiveFormsModule"],
         ],
         exports: [
             __WEBPACK_IMPORTED_MODULE_5__directory_component__["a" /* DirectoryComponent */]
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__directory_component__["a" /* DirectoryComponent */],
-            __WEBPACK_IMPORTED_MODULE_8_app_directory_sxc_toolbar_test__["a" /* SxcToolbarDirective */]
+            __WEBPACK_IMPORTED_MODULE_7__2sic_com_dnn_sxc_angular__["e" /* SxcToolbarDirective */]
         ],
         providers: [
             __WEBPACK_IMPORTED_MODULE_6_app_directory_directory_data_service__["a" /* DirectoryData */],
-            __WEBPACK_IMPORTED_MODULE_7__2sic_com_dnn_sxc_angular__["c" /* Data */],
+            __WEBPACK_IMPORTED_MODULE_7__2sic_com_dnn_sxc_angular__["b" /* Data */],
             {
                 provide: 'alphabet',
                 useValue: [
@@ -495,65 +490,6 @@ DirectoryModule = __decorate([
 ], DirectoryModule);
 
 //# sourceMappingURL=directory.module.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/directory/sxc-toolbar-test.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SxcToolbarDirective; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/index.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var SxcToolbarDirective = (function () {
-    function SxcToolbarDirective(renderer, elementRef, context) {
-        this.renderer = renderer;
-        this.elementRef = elementRef;
-        this.context = context;
-    }
-    SxcToolbarDirective.prototype.ngOnInit = function () {
-        var _this = this;
-        this.context.all$.subscribe(function (all) {
-            var sxc = all.sxc;
-            if (!sxc.manage)
-                return;
-            _this.setHtml(sxc.manage.getToolbar(_this.config, { hover: 'left' }));
-        });
-    };
-    SxcToolbarDirective.prototype.setHtml = function (html) {
-        this.elementRef.nativeElement.innerHTML = html;
-    };
-    return SxcToolbarDirective;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object)
-], SxcToolbarDirective.prototype, "config", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-    __metadata("design:type", Object)
-], SxcToolbarDirective.prototype, "settings", void 0);
-SxcToolbarDirective = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"])({
-        // tslint:disable-next-line:directive-selector
-        selector: 'sxc-toolbar'
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__["b" /* Context */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__["b" /* Context */]) === "function" && _c || Object])
-], SxcToolbarDirective);
-
-var _a, _b, _c;
-//# sourceMappingURL=sxc-toolbar-test.js.map
 
 /***/ }),
 

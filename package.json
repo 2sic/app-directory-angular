@@ -12,11 +12,11 @@
     "watch": "ng build --watch --output-hashing=none",
     "watchprod": "ng build --watch --prod --output-hashing=none",
     "copy:dist2dm": "cpx \"dist/*.*\" \"//srv-devweb-01/Projects/2sxc Apps Dev/Web/Portals/directory-angular4/2sxc/Directory/dist\" -w -v",
-    
     "copy:2dm": "cpx \"{,!(node_modules)/**/}*.*\" \"//srv-devweb-01/Projects/2sxc Apps Dev/Web/Portals/directory-angular4/2sxc/Directory\" -w -v"
   },
   "private": true,
   "dependencies": {
+    "@2sic.com/2sxc-typings": "^9.0.0",
     "@2sic.com/dnn-sxc-angular": "^1.5.0",
     "@angular/common": "4.4.0-RC.0",
     "@angular/compiler": "^4.4.0-RC.0",
