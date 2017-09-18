@@ -1,6 +1,6 @@
 {
   "name": "app-directory",
-  "version": "2.0.4",
+  "version": "2.2.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -16,8 +16,7 @@
   },
   "private": true,
   "dependencies": {
-    "@2sic.com/2sxc-typings": "^9.0.0",
-    "@2sic.com/dnn-sxc-angular": "^1.5.0",
+    "@2sic.com/dnn-sxc-angular": "^1.6.1",
     "@angular/common": "4.4.0-RC.0",
     "@angular/compiler": "^4.4.0-RC.0",
     "@angular/core": "^4.4.0-RC.0",

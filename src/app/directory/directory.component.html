@@ -27,9 +27,10 @@
                     <li>
                         <a [routerLink]="['/']">{{(i18n$ | async)?.AZBarAll}}</a>
                     </li>
-                    <li *ngFor="let az of azList | async">
+                    <li class="sc-element" *ngFor="let az of azList | async">
                         <a *ngIf="az.Active" [routerLink]="['/list', department, az.Letter]">{{az.Letter}}</a>
                         <a *ngIf="!az.Active" href="#" class="disabled">{{az.Letter}}</a>
+                        <sxc-toolbar [toolbar]="{ action: 'new', contentType: 'DirectoryItem', prefill: { Title: az.Letter }}"></sxc-toolbar>
                     </li>
                 </ul>
             </div>
@@ -38,12 +39,15 @@
 
     <!-- results -->
     <div class="app-directory-section">
-        <div *ngFor="let group of groups$ | async" class="app-directory-group">
-            <h3>{{group.label}}</h3>
+        <div *ngFor="let group of groups$ | async" class="app-directory-group sc-element">
+            <sxc-toolbar [toolbar]="{ action: 'new', contentType: 'DirectoryItem', prefill: { Title: group.label }}"></sxc-toolbar>
+            <h3 class="sc-element">
+                {{group.label}}
+            </h3>
             <div class="row">
                 <div *ngFor="let entry of group.entries" class="col col-xs-6 col-md-3" data-aos="fade-up">
                     <div class="app-directory-entry sc-element">
-                        <sxc-toolbar [toolbar]="{entityId: entry.Id}"></sxc-toolbar>
+                        <sxc-toolbar [toolbar]="{entityId: entry.Id, action: 'edit'}"></sxc-toolbar>
                         <img [src]="entry.Logo" [alt]="entry.Title">
                         <div class="app-directory-entry-info-wrapper">
                             <a [href]="entry.Link" target="_blank">

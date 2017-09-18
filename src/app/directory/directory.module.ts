@@ -6,7 +6,7 @@ import { SelectModule } from 'angular2-select';
  
 import { DirectoryComponent } from './directory.component';
 import { DirectoryData } from 'app/directory/directory-data.service';
-import { Data, ContentManagerModule, SxcToolbarDirective } from '@2sic.com/dnn-sxc-angular';
+import { Data, ContentManagerModule } from '@2sic.com/dnn-sxc-angular';
 
 @NgModule({
   imports: [
@@ -15,14 +15,13 @@ import { Data, ContentManagerModule, SxcToolbarDirective } from '@2sic.com/dnn-s
     FormsModule,
     SelectModule,
     ReactiveFormsModule,
-    // ContentManagerModule
+    ContentManagerModule
   ],
   exports: [
     DirectoryComponent
   ],
   declarations: [
-    DirectoryComponent,
-    SxcToolbarDirective
+    DirectoryComponent
   ],
   providers: [
     DirectoryData,
