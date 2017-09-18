@@ -47,7 +47,7 @@
             <div class="row">
                 <div *ngFor="let entry of group.entries" class="col col-xs-6 col-md-3" data-aos="fade-up">
                     <div class="app-directory-entry sc-element">
-                        <sxc-toolbar [toolbar]="{entityId: entry.Id, action: 'edit'}"></sxc-toolbar>
+                        <sxc-toolbar [toolbar]="{action: 'edit,delete', entityId: entry.Id, entityGuid: entry.Guid, entityTitle: entry.Title }"></sxc-toolbar>
                         <img [src]="entry.Logo" [alt]="entry.Title">
                         <div class="app-directory-entry-info-wrapper">
                             <a [href]="entry.Link" target="_blank">
