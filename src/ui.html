@@ -1,34 +1,18 @@
+<base href="/mitglieder/">
+<app-root>loading...</app-root>
+<script type="text/javascript" src="[App:Path]/dist/inline.bundle.js"></script>
+<script type="text/javascript" src="[App:Path]/dist/polyfills.bundle.js"></script>
+<script type="text/javascript" src="[App:Path]/dist/vendor.bundle.js"></script>
+<script type="text/javascript" src="[App:Path]/dist/main.bundle.js"></script>
 
-<!doctype html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>AppDirectory</title>
-    <base href="/mitglieder/">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-
-<body>
-    <app-root>Loading...</app-root>
-    <script type="text/javascript" src="/Portals/0/2sxc/Directory/inline.bundle.js"></script>
-    <script type="text/javascript" src="/Portals/0/2sxc/Directory/polyfills.bundle.js"></script>
-    <script type="text/javascript" src="/Portals/0/2sxc/Directory/vendor.bundle.js"></script>
-    <script type="text/javascript" src="/Portals/0/2sxc/Directory/main.bundle.js"></script>
-
-    <!-- Prevent Form Submit-->
-    <script>
-        (function() {
-            var firstForm = document.querySelectorAll("form")[0];
-            if (!firstForm) return false;
-            firstForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-            });
-        })();
-    </script>
-</body>
-</body>
-
-</html>
+<!-- Prevent Form Submit -->
+<script>
+	(function() {
+		var firstForm = document.querySelectorAll("form")[0];
+		if (!firstForm) return false;
+		firstForm.addEventListener('submit', function(e) {
+			e.preventDefault();
+		});
+	})();
+</script>
+<!-- </body> -->
