@@ -1,16 +1,16 @@
-import { DirectoryItem } from '../entities/directory-item';
-import { Injectable, Inject } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import { Data } from '@2sic.com/dnn-sxc-angular';
-
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Industry } from '../entities/industry';
-import { Config } from 'app/entities/config';
-import { I18n } from 'app/entities/i18n';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Config } from 'app/entities/config';
+import { Data } from '@2sic.com/dnn-sxc-angular';
+import { DirectoryItem } from '../entities/directory-item';
 import { GroupedItems } from 'app/entities/grouped-items';
+import { I18n } from 'app/entities/i18n';
+import { Industry } from '../entities/industry';
+import { Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class DirectoryData {
@@ -71,7 +71,6 @@ export class DirectoryData {
     });
   }
 
-
   private prepareForSearch(item: DirectoryItem): DirectoryItem {
     const SearchText = (item.Title + ' '
       + item.Town + ' '
@@ -80,6 +79,4 @@ export class DirectoryData {
 
     return Object.assign({}, item, { SearchText });
   }
-
-
 }

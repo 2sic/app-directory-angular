@@ -1,7 +1,7 @@
-import { Routes, RouterModule } from '@angular/router';
-import { DirectoryComponent } from 'app/directory/directory.component';
+import { DirectoryComponent } from './directory/directory.component';
 import { NgModule } from '@angular/core';
-import { RouteReuseSameStrategy } from 'app/route-reuse-strategy';
+import { RouteReuseSameStrategy } from './route-reuse-strategy';
+import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   {

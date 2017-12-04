@@ -1,4 +1,3 @@
-
 import { DirectoryItem } from './directory-item';
 
 export class GroupedItems {

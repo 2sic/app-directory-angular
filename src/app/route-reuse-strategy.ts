@@ -1,4 +1,4 @@
-import { ActivatedRouteSnapshot, RouteReuseStrategy, DetachedRouteHandle } from '@angular/router';
+import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 import { Provider } from '@angular/core/core';
 
 /**
@@ -11,7 +11,6 @@ export class RouteReuseSameStrategy implements RouteReuseStrategy {
     store(route: ActivatedRouteSnapshot, detachedTree: DetachedRouteHandle): void {}
     shouldAttach(route: ActivatedRouteSnapshot): boolean { return false; }
     retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle|null { return null; }
-
 
     /**
      * the original version, as used inside Angular

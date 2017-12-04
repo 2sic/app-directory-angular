@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ContentManagerModule } from '@2sic.com/dnn-sxc-angular';
+import { DirectoryComponent } from './directory.component';
+import { DirectoryData } from './directory-data.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SelectModule } from 'angular2-select';
-
-import { DirectoryComponent } from './directory.component';
-import { DirectoryData } from 'app/directory/directory-data.service';
-import { Data, ContentManagerModule } from '@2sic.com/dnn-sxc-angular';
 
 @NgModule({
   imports: [
@@ -25,7 +24,6 @@ import { Data, ContentManagerModule } from '@2sic.com/dnn-sxc-angular';
   ],
   providers: [
     DirectoryData,
-    Data,
     {
       provide: 'alphabet',
       useValue: [

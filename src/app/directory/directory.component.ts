@@ -1,15 +1,21 @@
-import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { DirectoryData } from 'app/directory/directory-data.service';
-import { DirectoryItem } from '../entities/directory-item';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Industry } from '../entities/industry';
+import { AZLetter } from '../entities/az-letter';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output
+  } from '@angular/core';
 import { debounce } from 'rxjs/operator/debounce';
-import { I18n } from 'app/entities/i18n';
+import { DirectoryData } from './directory-data.service';
+import { DirectoryItem } from '../entities/directory-item';
 import { FormControl } from '@angular/forms';
-import { GroupedItems } from 'app/entities/grouped-items';
-import { AZLetter } from 'app/entities/az-letter';
+import { GroupedItems } from '../entities/grouped-items';
+import { I18n } from '../entities/i18n';
+import { Industry } from '../entities/industry';
 import { Observable } from 'rxjs/Observable';
-
 
 @Component({
   selector: 'app-directory',
@@ -30,7 +36,6 @@ export class DirectoryComponent {
     private data: DirectoryData,
     private route: ActivatedRoute,
     private router: Router,
-    //public edit: BetaEdit,
     @Inject('alphabet') private alphabet: string[]
   ) {
     this.industries$ = data.industries$;

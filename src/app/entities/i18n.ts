@@ -7,7 +7,6 @@ export class I18n {
     SearchLabel = '...';
     SearchPlaceholder = '';
     IndustryLabel = '...';
-    // IndustryPlaceholder: string;
     IndustryAll: string;
     AZBarAll = '*';
 }
