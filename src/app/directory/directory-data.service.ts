@@ -1,16 +1,15 @@
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Config } from 'app/entities/config';
+import { Config } from '../entities/config';
 import { Data } from '@2sic.com/dnn-sxc-angular';
 import { DirectoryItem } from '../entities/directory-item';
-import { GroupedItems } from 'app/entities/grouped-items';
-import { I18n } from 'app/entities/i18n';
+import { GroupedItems } from '../entities/grouped-items';
+import { I18n } from '../entities/i18n';
 import { Industry } from '../entities/industry';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
-
 
 @Injectable()
 export class DirectoryData {

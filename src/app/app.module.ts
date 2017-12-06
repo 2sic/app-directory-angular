@@ -1,13 +1,13 @@
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { ContentManagerModule } from '@2sic.com/dnn-sxc-angular';
 import { DirectoryModule } from './directory/directory.module';
 import { DnnSxcModule } from '@2sic.com/dnn-sxc-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouteReuseProvider } from './route-reuse-strategy';
 import { RouterModule } from '@angular/router';
+// import { ContentManagerModule } from '@2sic.com/dnn-sxc-angular';
 
 @NgModule({
   declarations: [

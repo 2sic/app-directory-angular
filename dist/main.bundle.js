@@ -176,6 +176,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+// import { ContentManagerModule } from '@2sic.com/dnn-sxc-angular';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -209,7 +210,7 @@ var AppModule = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DirectoryData; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_app_entities_config__ = __webpack_require__("../../../../../src/app/entities/config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_config__ = __webpack_require__("../../../../../src/app/entities/config.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__ = __webpack_require__("../../../../@2sic.com/dnn-sxc-angular/dist/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__2sic_com_dnn_sxc_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
@@ -242,7 +243,7 @@ var DirectoryData = (function () {
             .startWith(new Array());
         // config & i18n
         var config$ = data.query$('Config');
-        this.config$ = config$.startWith(new __WEBPACK_IMPORTED_MODULE_0_app_entities_config__["a" /* Config */]());
+        this.config$ = config$.startWith(new __WEBPACK_IMPORTED_MODULE_0__entities_config__["a" /* Config */]());
         this.i18n$ = this.config$.map(function (c) { return c.Resources[0]; }).share();
     }
     DirectoryData.prototype.groupsFilteredByRoute$ = function (route) {
