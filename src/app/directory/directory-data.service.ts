@@ -1,5 +1,7 @@
+
+import {map,startWith,share} from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject ,  Observable ,  Subject, combineLatest } from 'rxjs';
 import { Config } from '../entities/config';
 import { Data } from '@2sic.com/dnn-sxc-angular';
 import { DirectoryItem } from '../entities/directory-item';
@@ -7,9 +9,7 @@ import { GroupedItems } from '../entities/grouped-items';
 import { I18n } from '../entities/i18n';
 import { Industry } from '../entities/industry';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class DirectoryData {
@@ -23,22 +23,22 @@ export class DirectoryData {
     @Inject('alphabet') private alphabet: string[]
   ) {
     this.industries$ = data.content$<Industry>('Industry')
-      .startWith(new Array<Industry>());
+      .pipe(startWith(new Array<Industry>()));
 
     this.entries$ =  data.content$<DirectoryItem>('DirectoryItem')
-      .startWith(new Array<DirectoryItem>());
+      .pipe(startWith(new Array<DirectoryItem>()));
 
       // config & i18n
       const config$ = data.query$<Config>('Config');
-      this.config$ = config$.startWith(new Config());
-      this.i18n$ = this.config$.map(c => c.Resources[0]).share();
+      this.config$ = config$.pipe(startWith(new Config()));
+      this.i18n$ = this.config$.pipe(map(c => c.Resources[0])).pipe(share());
   }
 
   groupsFilteredByRoute$(route: ActivatedRoute): Observable<GroupedItems[]> {
-    return Observable.combineLatest(
-      this.entries$.map(all => all.map(this.prepareForSearch)),
+    return combineLatest(
+      this.entries$.pipe(map(all => all.map(this.prepareForSearch))),
       route.params
-    ).map(([entries, params]) => {
+    ).pipe(map(([entries, params]) => {
       const department = params['department'] === 'all' ? undefined : params['department'];
       const firstChar = params['letter'] === 'all' ? undefined : params['letter'];
       const needle = params['needle'] ? params['needle'].toLocaleLowerCase() : undefined;
@@ -67,7 +67,7 @@ export class DirectoryData {
 
         // hide unused letters
         .filter(g => g.entries.length > 0);
-    });
+    }));
   }
 
   private prepareForSearch(item: DirectoryItem): DirectoryItem {
