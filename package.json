@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:watch": "ng build --watch --output-hashing=none -vc=true",
+    "build:watch": "ng build --watch",
     "build:copy": "cpx \"dist/*.*\" \"//srv-devweb-01/Projects/2sxc Apps Dev/Web/Portals/directory-angular4/2sxc/Directory/dist\" -w -v",
     "develop": "concurrently \"npm run build:watch\" \"npm run build:copy\""
   },
